@@ -11,7 +11,7 @@ public class EventStreamWriter<T> {
     private var handlers: [T -> ()] = []
     private let queue: DispatchQueue
 
-    public init(queue: DispatchQueue = DispatchQueue("Nifty.EventStreamWriter", attr: .Concurrent)) {
+    public init(queue: DispatchQueue = DispatchQueue("Nifty.EventStreamWriter.queue", attr: .Concurrent)) {
         self.queue = queue
     }
 

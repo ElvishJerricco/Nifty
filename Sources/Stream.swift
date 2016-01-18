@@ -85,10 +85,10 @@ public extension Stream {
 
     public func reduce<Reduced>(
         initial: Reduced,
-        queue: DispatchQueue = DispatchQueue(),
+        queue: DispatchQueue = DispatchQueue("Nifty.Stream.reduce.queue"),
         reducer: (Reduced, T) -> Reduced
         ) -> Future<Reduced> {
-            let reducingQueue = DispatchQueue()
+            let reducingQueue = DispatchQueue("Nifty.Stream.reduce.reducingQueue")
             reducingQueue.setTargetQueue(queue)
             var reduced = initial
 
