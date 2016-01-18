@@ -14,7 +14,12 @@ public enum Either<L, R> {
 
 public extension Either {
     public func map<U>(f: R -> U) -> Either<L, U> {
-        return Either.point(f) <*> self
+        switch self {
+        case .Right(let r):
+            return .Right(f(r))
+        case .Left(let l):
+            return .Left(l)
+        }
     }
 }
 
@@ -26,11 +31,7 @@ public func <^><L, R, U>(f: R -> U, either: Either<L, R>) -> Either<L, U> {
 
 public extension Either {
     public func apply<U>(fn: Either<L, R -> U>) -> Either<L, U> {
-        return fn.flatMap { f in
-            return self.flatMap { r in
-                return Either.point(f(r))
-            }
-        }
+        return fn.flatMap(self.map)
     }
 }
 
@@ -63,7 +64,12 @@ public func >>==<L, R, U>(either: Either<L, R>, f: R -> Either<L, U>) -> Either<
 
 public extension Either {
     public func leftMap<U>(f: L -> U) -> Either<U, R> {
-        return leftApply(Either.leftPoint(f))
+        switch self {
+        case .Left(let l):
+            return .Left(f(l))
+        case .Right(let r):
+            return .Right(r)
+        }
     }
 }
 
@@ -71,11 +77,7 @@ public extension Either {
 
 public extension Either {
     public func leftApply<U>(resultFunc: Either<L -> U, R>) -> Either<U, R> {
-        return resultFunc.leftFlatMap { f in
-            return self.leftFlatMap { l in
-                return Either.leftPoint(f(l))
-            }
-        }
+        return resultFunc.leftFlatMap(self.leftMap)
     }
 }
 

@@ -42,7 +42,9 @@ public struct EventStream<T> {
 
 public extension EventStream {
     public func map<U>(f: T -> U) -> EventStream<U> {
-        return EventStream.point(f) <*> self
+        return EventStream<U> { handler in
+            self.addHandler(handler * f)
+        }
     }
 }
 
@@ -54,11 +56,7 @@ public func <^><T, U>(f: T -> U, stream: EventStream<T>) -> EventStream<U> {
 
 public extension EventStream {
     public func apply<U>(fn: EventStream<T -> U>) -> EventStream<U> {
-        return fn.flatMap { f in
-            return self.flatMap { r in
-                return EventStream.point(f(r))
-            }
-        }
+        return fn.flatMap(self.map)
     }
 }
 

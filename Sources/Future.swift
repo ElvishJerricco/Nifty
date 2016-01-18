@@ -71,9 +71,7 @@ public func <^><T, U>(f: T -> U, future: Future<T>) -> Future<U> {
 
 public extension Future {
     public func apply<U>(futureFunc: Future<T -> U>) -> Future<U> {
-        return futureFunc.flatMap { f in
-            return self.map(f)
-        }
+        return futureFunc.flatMap(self.map)
     }
 }
 

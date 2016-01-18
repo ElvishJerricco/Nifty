@@ -30,9 +30,7 @@ public func <^><T, U>(f: T -> U, stream: Stream<T>) -> Stream<U> {
 // Applicative
 public extension Stream {
     public func apply<U>(f: Stream<T -> U>) -> Stream<U> {
-        return f.flatMap { fn in
-            return self.map(fn)
-        }
+        return f.flatMap(self.map)
     }
 }
 
@@ -100,8 +98,8 @@ public extension Stream {
                 reducingQueue.async {
                     reduced = reducer(reduced, t)
                 }
-                }.notify(reducingQueue) {
-                    reducedPromise.complete(reduced)
+            }.notify(reducingQueue) {
+                reducedPromise.complete(reduced)
             }
 
             return reducedPromise.future
