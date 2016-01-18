@@ -15,6 +15,7 @@ public struct Stream<T> {
 }
 
 // Functor
+
 public extension Stream {
     public func map<U>(f: T -> U) -> Stream<U> {
         return Stream<U> { queue, uHandler in
@@ -28,6 +29,7 @@ public func <^><T, U>(f: T -> U, stream: Stream<T>) -> Stream<U> {
 }
 
 // Applicative
+
 public extension Stream {
     public func apply<U>(f: Stream<T -> U>) -> Stream<U> {
         return f.flatMap(self.map)
@@ -39,6 +41,7 @@ public func <*><A, B>(f: Stream<A -> B>, a: Stream<A>) -> Stream<B> {
 }
 
 // Monad
+
 public extension Stream {
     public static func point<T>(tElement: T) -> Stream<T> {
         return Stream<T> { queue, tHandler in
@@ -66,6 +69,7 @@ public func >>==<T, U>(stream: Stream<T>, f: T -> Stream<U>) -> Stream<U> {
 }
 
 // Util
+
 public extension Stream {
     public static func concat<T>(streams: Stream<Stream<T>>) -> Stream<T> {
         return streams.flatMap { $0 }
@@ -117,6 +121,7 @@ public extension Stream {
 }
 
 // Collections
+
 public extension CollectionType {
     public func stream() -> Stream<Self.Generator.Element> {
         return Stream { queue, handler in
