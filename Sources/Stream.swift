@@ -128,6 +128,18 @@ public extension Stream {
             }
         }
     }
+
+    public func concurrent() -> Stream<T> {
+        return Stream<T> { queue, handler in
+            let concurrentQueue = DispatchQueue("Nifty.Stream.sequential.concurrentQueue", attr: .Concurrent)
+            concurrentQueue.setTargetQueue(queue)
+            return self.makeTrigger(concurrentQueue) { t in
+                queue.async {
+                    handler(t)
+                }
+            }
+        }
+    }
 }
 
 // Collections
