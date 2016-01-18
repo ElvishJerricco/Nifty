@@ -118,7 +118,7 @@ public extension Stream {
     }
 
     public func serial() -> Stream<T> {
-        return Stream<T> { queue, handler in
+        return Stream { queue, handler in
             let serialQueue = DispatchQueue("Nifty.Stream.sequential.serialQueue")
             serialQueue.setTargetQueue(queue)
             return self.makeTrigger(serialQueue) { t in
@@ -130,7 +130,7 @@ public extension Stream {
     }
 
     public func concurrent() -> Stream<T> {
-        return Stream<T> { queue, handler in
+        return Stream { queue, handler in
             let concurrentQueue = DispatchQueue("Nifty.Stream.sequential.concurrentQueue", attr: .Concurrent)
             concurrentQueue.setTargetQueue(queue)
             return self.makeTrigger(concurrentQueue) { t in
