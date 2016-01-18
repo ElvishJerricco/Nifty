@@ -96,17 +96,15 @@ public extension Stream {
             reducingQueue.setTargetQueue(queue)
             var reduced = initial
 
-            let reducedPromise = Promise<Reduced>()
-
             self.forEach(queue) { t in
                 reducingQueue.async {
                     reduced = reducer(reduced, t)
                 }
-            }.notify(reducingQueue) {
-                reducedPromise.complete(reduced)
             }
 
-            return reducedPromise.future
+            return reducingQueue.future {
+                return reduced
+            }
     }
 
     public func filter(predicate: T -> Bool) -> Stream<T> {
