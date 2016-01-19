@@ -83,7 +83,7 @@ public extension Stream {
         return Stream<T> { (_,_) in { DispatchGroup() } }
     }
 
-    public func forEach(queue: DispatchQueue = DispatchQueue(), handler: T -> ()) -> DispatchGroup {
+    public func forEach(queue: DispatchQueue = DispatchQueue("Nifty.Stream.forEach.queue"), handler: T -> ()) -> DispatchGroup {
         return self.makeTrigger(queue, handler)()
     }
 
