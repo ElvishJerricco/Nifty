@@ -118,6 +118,16 @@ public extension DispatchQueue {
     }
 }
 
+public extension DispatchGroup {
+    public func future<T>(queue: DispatchQueue, f: () -> T) -> Future<T> {
+        let promise = Promise<T>()
+        self.notify(queue) {
+            promise.complete(f())
+        }
+        return promise.future
+    }
+}
+
 public extension Future {
     public func wait() -> T {
         return wait(.Forever)!
