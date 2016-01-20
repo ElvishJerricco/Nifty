@@ -140,9 +140,9 @@ public extension Stream {
     }
 }
 
-// Collections
+// Sequences
 
-public extension CollectionType {
+public extension SequenceType {
     public func stream() -> Stream<Self.Generator.Element> {
         return Stream { queue, group, handler in
             return {
