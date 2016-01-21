@@ -114,30 +114,6 @@ public extension Stream {
             }
         }
     }
-
-    public func serial() -> Stream<T> {
-        return Stream { queue, group, handler in
-            let serialQueue = DispatchQueue("Nifty.Stream.sequential.serialQueue")
-            serialQueue.setTargetQueue(queue)
-            return self.makeTrigger(serialQueue, group) { t in
-                queue.async(group) {
-                    handler(t)
-                }
-            }
-        }
-    }
-
-    public func concurrent() -> Stream<T> {
-        return Stream { queue, group, handler in
-            let concurrentQueue = DispatchQueue("Nifty.Stream.sequential.concurrentQueue", attr: .Concurrent)
-            concurrentQueue.setTargetQueue(queue)
-            return self.makeTrigger(concurrentQueue, group) { t in
-                queue.async(group) {
-                    handler(t)
-                }
-            }
-        }
-    }
 }
 
 // Sequences
