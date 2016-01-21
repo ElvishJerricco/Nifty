@@ -5,7 +5,6 @@
 //  Copyright © 2016 ElvishJerricco. All rights reserved.
 //
 
-import Foundation
 import DispatchKit
 
 public typealias Trigger = () -> ()
