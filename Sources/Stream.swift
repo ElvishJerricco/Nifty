@@ -81,7 +81,7 @@ public extension Stream {
         return Stream<T> { (_,_,_) in {} }
     }
 
-    public func forEach(queue: DispatchQueue = DispatchQueue("Nifty.Stream.forEach.queue"), handler: T -> ()) -> DispatchGroup {
+    public func forEach(queue: DispatchQueue = Dispatch.globalQueue, handler: T -> ()) -> DispatchGroup {
         let group = DispatchGroup()
         self.makeTrigger(queue, group, handler)()
         return group
@@ -89,7 +89,7 @@ public extension Stream {
 
     public func reduce<Reduced>(
         initial: Reduced,
-        queue: DispatchQueue = DispatchQueue("Nifty.Stream.reduce.queue"),
+        queue: DispatchQueue = Dispatch.globalQueue,
         reducer: (Reduced, T) -> Reduced
     ) -> Future<Reduced> {
         let reducingQueue = DispatchQueue("Nifty.Stream.reduce.reducingQueue")
