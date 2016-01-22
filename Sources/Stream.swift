@@ -94,12 +94,9 @@ public extension Stream {
     ) -> Future<Reduced> {
         let reducingLock = DispatchQueue("Nifty.Stream.reduce.reducingLock")
         var availableReduced: Reduced? = initial
-        var numDone = 0
 
         return self.forEach(queue) { t in
             let reduced = reducingLock.future { () -> Reduced in
-                numDone++
-                print("lock: \(numDone)")
                 if let r = availableReduced {
                     availableReduced = nil
                     return r
@@ -107,7 +104,6 @@ public extension Stream {
                     return initial
                 }
             }.wait()
-            print("unlock: \(numDone)")
             let newReduced = reducer(reduced, t)
             reducingLock.async {
                 if let r = availableReduced {
