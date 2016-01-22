@@ -15,7 +15,7 @@
 		7E4720881C4D1FFE0082D597 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4720831C4D1FFE0082D597 /* Operators.swift */; };
 		7EFF2AD31C4B6FAA00E27D74 /* Nifty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EFF2AC81C4B6FAA00E27D74 /* Nifty.framework */; };
 		7EFF2AE01C4B6FB700E27D74 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2AB41C4B6F7200E27D74 /* Stream.swift */; };
-		7EFF2AE11C4B6FB900E27D74 /* NiftyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2AB61C4B6F7200E27D74 /* NiftyTests.swift */; };
+		7EFF2AE11C4B6FB900E27D74 /* StreamPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2AB61C4B6F7200E27D74 /* StreamPerformanceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +65,7 @@
 		7E4720831C4D1FFE0082D597 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		7EFF2A7C1C4B6F7200E27D74 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		7EFF2AB41C4B6F7200E27D74 /* Stream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
-		7EFF2AB61C4B6F7200E27D74 /* NiftyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiftyTests.swift; sourceTree = "<group>"; };
+		7EFF2AB61C4B6F7200E27D74 /* StreamPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamPerformanceTests.swift; sourceTree = "<group>"; };
 		7EFF2AC81C4B6FAA00E27D74 /* Nifty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nifty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EFF2ACD1C4B6FAA00E27D74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EFF2AD21C4B6FAA00E27D74 /* NiftyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NiftyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,7 +132,7 @@
 		7EFF2AB51C4B6F7200E27D74 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				7EFF2AB61C4B6F7200E27D74 /* NiftyTests.swift */,
+				7EFF2AB61C4B6F7200E27D74 /* StreamPerformanceTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -219,6 +219,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = ElvishJerricco;
 				TargetAttributes = {
 					7EFF2AC71C4B6FAA00E27D74 = {
 						CreatedOnToolsVersion = 7.2;
@@ -318,7 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EFF2AE11C4B6FB900E27D74 /* NiftyTests.swift in Sources */,
+				7EFF2AE11C4B6FB900E27D74 /* StreamPerformanceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
