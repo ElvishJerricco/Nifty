@@ -12,24 +12,37 @@ public class Promise<T> {
     private var completed: T? = nil
     
     private lazy var semaphore = DispatchSemaphore(0) // Lazy so that it's not made if not used
+    private var completionQueue: DispatchQueue? = DispatchQueue("Nifty.Promise.completionQueue") // serial queue
     
     public init() {
     }
     
     private func onComplete(handler: T -> ()) {
-        if let completed = completed {
-            handler(completed)
-        } else {
-            handlers.append(handler)
+        completionQueue?.async {
+            if let completed = self.completed {
+                handler(completed)
+            } else {
+                self.handlers.append(handler)
+            }
         }
     }
     
-    public func complete(t: T) {
-        completed = t
-        for handler in handlers {
-            handler(t)
+    public func complete(t: T, queue: DispatchQueue = Dispatch.globalQueue) {
+        completionQueue?.async {
+            if self.completed != nil {
+                return
+            }
+
+            self.completed = t
+            // queue.apply is blocking
+            queue.apply(self.handlers.count) { index in
+                self.handlers[index](t)
+            }
+
+            // Dealloc unneeded resources.
+            self.handlers = []
+            self.completionQueue = nil
         }
-        handlers = []
     }
     
     public var future: Future<T> {
