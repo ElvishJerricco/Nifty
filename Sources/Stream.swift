@@ -88,6 +88,41 @@ public extension Stream {
 
     public func reduce<Reduced>(
         initial: Reduced,
+        merger: (Reduced, Reduced) -> Reduced,
+        queue: DispatchQueue = Dispatch.globalQueue,
+        reducer: (Reduced, T) -> Reduced
+    ) -> Future<Reduced> {
+        let reducingLock = DispatchQueue("Nifty.Stream.reduce.reducingLock")
+        var availableReduced: Reduced? = initial
+        var numDone = 0
+
+        return self.forEach(queue) { t in
+            let reduced = reducingLock.future { () -> Reduced in
+                numDone++
+                print("lock: \(numDone)")
+                if let r = availableReduced {
+                    availableReduced = nil
+                    return r
+                } else {
+                    return initial
+                }
+            }.wait()
+            print("unlock: \(numDone)")
+            let newReduced = reducer(reduced, t)
+            reducingLock.async {
+                if let r = availableReduced {
+                    availableReduced = merger(r, newReduced)
+                } else {
+                    availableReduced = newReduced
+                }
+            }
+        }.future(reducingLock) {
+            return availableReduced ?? initial
+        }
+    }
+
+    public func reduce<Reduced>(
+        initial: Reduced,
         queue: DispatchQueue = Dispatch.globalQueue,
         reducer: (Reduced, T) -> Reduced
     ) -> Future<Reduced> {
