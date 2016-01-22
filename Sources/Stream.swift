@@ -115,15 +115,16 @@ public extension Stream {
     }
 }
 
-// Sequences
+// Collections
 
-public extension SequenceType {
+public extension CollectionType where Self.Index.Distance == Int {
     public func stream() -> Stream<Self.Generator.Element> {
         return Stream { queue, group, handler in
             return {
-                for element in self {
-                    queue.async(group) {
-                        handler(element)
+                // DispatchQueue.apply is blocking, so put it in the background
+                Dispatch.globalQueue.async(group) {
+                    queue.apply(self.count) { index in
+                        handler(self[self.startIndex.advancedBy(index)])
                     }
                 }
             }
