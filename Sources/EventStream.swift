@@ -9,17 +9,12 @@ import DispatchKit
 
 public class EventStreamWriter<T> {
     private var handlers: [T -> ()] = []
-    private let queue: DispatchQueue
-
-    public init(queue: DispatchQueue = DispatchQueue("Nifty.EventStreamWriter.queue", attr: .Concurrent)) {
-        self.queue = queue
-    }
 
     public func addHandler(handler: T -> ()) {
         handlers.append(handler)
     }
 
-    public func writeEvent(t: T) -> DispatchGroup {
+    public func writeEvent(t: T, queue: DispatchQueue = Dispatch.globalQueue) -> DispatchGroup {
         let group = DispatchGroup()
         for handler in handlers {
             queue.async(group) {
