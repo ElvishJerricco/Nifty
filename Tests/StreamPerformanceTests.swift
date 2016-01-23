@@ -1,6 +1,6 @@
 //
 //  StreamPerformanceTests.swift
-//  StreamPerformanceTests
+//  NiftyTests
 //
 //  Copyright © 2016 ElvishJerricco. All rights reserved.
 //
