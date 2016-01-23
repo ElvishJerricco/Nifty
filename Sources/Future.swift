@@ -34,6 +34,13 @@ public class Promise<T> {
             self.completed = t
             // queue.apply is blocking
             queue.apply(self.handlers.count) { index in
+                // Note: There is a potential deadlock here at queue.apply when queue targets completionQueue.
+                // This is because completionQueue is serial, so queue can't have blocks running at this time.
+                // The same deadlock would be caused when completionQueue targets queue if queue is serial.
+                // However, this deadlock IS NOT possible.
+                // CompletionQueue is never handed out to become targeted, nor is its target set.
+                // It does have an implicit target of some global queue.
+                // But global queues are always concurrent, so they won't cause this deadlock.
                 self.handlers[index](t)
             }
 
