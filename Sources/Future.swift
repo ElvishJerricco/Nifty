@@ -122,8 +122,8 @@ public extension DispatchQueue {
     public func future<T>(f: () -> T) -> Future<T> {
         let promise = Promise<T>()
         self.async {
-            let t = f()
-            promise.complete(t)
+            // promise.complete is non-blocking. No deadlock for using self inside a dispatch on self when self is serial
+            promise.complete(f(), queue: self)
         }
         return promise.future
     }
@@ -133,7 +133,8 @@ public extension DispatchGroup {
     public func future<T>(queue: DispatchQueue, f: () -> T) -> Future<T> {
         let promise = Promise<T>()
         self.notify(queue) {
-            promise.complete(f())
+            // promise.complete is non-blocking. No deadlock for using queue inside a dispatch on queue when queue is serial
+            promise.complete(f(), queue: queue)
         }
         return promise.future
     }
