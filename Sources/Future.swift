@@ -10,8 +10,6 @@ import DispatchKit
 public class Promise<T> {
     private var handlers: [T -> ()] = []
     private var completed: T? = nil
-    
-    private lazy var semaphore = DispatchSemaphore(0) // Lazy so that it's not made if not used
     private var completionQueue: DispatchQueue? = DispatchQueue("Nifty.Promise.completionQueue") // serial queue
     
     public init() {
@@ -148,12 +146,14 @@ public extension Future {
     
     public func wait(time: DispatchTime) -> T? {
         var t: T? = nil
+        let semaphore = DispatchSemaphore(0)
+        
         onComplete {
             t = $0
-            self.promise.semaphore.signal()
+            semaphore.signal()
         }
         
-        promise.semaphore.wait(time)
+        semaphore.wait(time)
         
         return t
     }
