@@ -8,17 +8,20 @@
 import DispatchKit
 
 public class Promise<T> {
-    private var handlers: [T -> ()] = []
+    private var handlers: [(T, DispatchQueue) -> ()] = []
     private var completed: T? = nil
     private var completionQueue: DispatchQueue? = DispatchQueue("Nifty.Promise.completionQueue") // serial queue
     
     public init() {
     }
     
-    private func onComplete(handler: T -> ()) {
-        completionQueue?.async {
+    private func onComplete(handler: (T, DispatchQueue) -> ()) {
+        guard let queue = completionQueue else {
+            return
+        }
+        queue.async {
             if let completed = self.completed {
-                handler(completed)
+                handler(completed, queue)
             } else {
                 self.handlers.append(handler)
             }
@@ -41,7 +44,7 @@ public class Promise<T> {
                 // CompletionQueue is never handed out to become targeted, nor is its target set.
                 // It does have an implicit target of some global queue.
                 // But global queues are always concurrent, so they won't cause this deadlock.
-                self.handlers[index](t)
+                self.handlers[index](t, queue)
             }
 
             // Dealloc unneeded resources.
@@ -62,7 +65,7 @@ public struct Future<T> {
         self.promise = promise
     }
     
-    public func onComplete(handler: T -> ()) {
+    public func onComplete(handler: (T, DispatchQueue) -> ()) {
         promise.onComplete(handler)
     }
 }
@@ -73,8 +76,8 @@ public extension Future {
     public func map<U>(f: T -> U) -> Future<U> {
         let uPromise = Promise<U>()
 
-        onComplete { t in
-            uPromise.complete(f(t))
+        onComplete { t, queue in
+            uPromise.complete(f(t), queue: queue)
         }
 
         return uPromise.future
@@ -109,10 +112,8 @@ public extension Future {
     public func flatMap<U>(f: T -> Future<U>) -> Future<U> {
         let uPromise = Promise<U>()
 
-        onComplete { t in
-            f(t).onComplete { u in
-                uPromise.complete(u)
-            }
+        onComplete { t, _ in
+            f(t).onComplete(uPromise.complete)
         }
 
         return uPromise.future
@@ -156,8 +157,8 @@ public extension Future {
         var t: T? = nil
         let semaphore = DispatchSemaphore(0)
         
-        onComplete {
-            t = $0
+        onComplete { completed, _ in
+            t = completed
             semaphore.signal()
         }
         
