@@ -135,6 +135,15 @@ public extension DispatchQueue {
         }
         return promise.future
     }
+
+    public func barrierFuture<T>(f: () -> T) -> Future<T> {
+        let promise = Promise<T>()
+        self.barrierAsync {
+            // promise.complete is non-blocking. No deadlock for using self inside a dispatch on self when self is serial
+            promise.complete(f(), queue: self)
+        }
+        return promise.future
+    }
 }
 
 public extension DispatchGroup {
