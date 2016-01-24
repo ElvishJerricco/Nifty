@@ -10,18 +10,15 @@ import DispatchKit
 public class Promise<T> {
     private var handlers: [(T, DispatchQueue) -> ()] = []
     private var completed: T? = nil
-    private var completionQueue: DispatchQueue? = DispatchQueue("Nifty.Promise.completionQueue") // serial queue
+    private let completionQueue: DispatchQueue = DispatchQueue("Nifty.Promise.completionQueue") // serial queue
     
     public init() {
     }
     
     private func onComplete(handler: (T, DispatchQueue) -> ()) {
-        guard let queue = completionQueue else {
-            return
-        }
-        queue.async {
+        completionQueue.async {
             if let completed = self.completed {
-                handler(completed, queue)
+                handler(completed, self.completionQueue)
             } else {
                 self.handlers.append(handler)
             }
@@ -29,7 +26,7 @@ public class Promise<T> {
     }
     
     public func complete(t: T, queue: DispatchQueue = Dispatch.globalQueue) {
-        completionQueue?.async {
+        completionQueue.async {
             if self.completed != nil {
                 return
             }
@@ -49,7 +46,6 @@ public class Promise<T> {
 
             // Dealloc unneeded resources.
             self.handlers = []
-            self.completionQueue = nil
         }
     }
     
