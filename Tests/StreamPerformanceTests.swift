@@ -1,6 +1,6 @@
 //
 //  StreamPerformanceTests.swift
-//  NiftyTests
+//  Nifty
 //
 //  Copyright © 2016 ElvishJerricco. All rights reserved.
 //
@@ -27,11 +27,6 @@ class StreamPerformanceTests: XCTestCase {
         super.tearDown()
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
     func testSerialStreamPerformance() {
         self.measureBlock {
             print("Testing serial stream performance")
@@ -52,18 +47,42 @@ class StreamPerformanceTests: XCTestCase {
         }
     }
 
-    func testSerialReductionPerformance() {
+    let smallReducer: (Int, Int) -> Int = {
+        usleep(1)
+        return $0 + $1
+    }
+    func testSerialReductionPerformanceForSmallReducer() {
         self.measureBlock {
-            print("Testing serial stream reduction performance")
-            let reduction = self.largeArray.stream().reduce(0, reducer: +).wait()
+            print("Testing serial reduction performance for small reducer")
+            let reduction = self.largeArray.stream().reduce(0, reducer: self.smallReducer).wait()
             print(reduction)
         }
     }
 
-    func testConcurrentReductionPerformance() {
+    func testConcurrentReductionPerformanceForSmallReducer() {
         self.measureBlock {
-            print("Testing concurrent stream reduction performance")
-            let reduction = self.largeArray.stream().reduce(0, merger: +, reducer: +).wait()
+            print("Testing concurrent reduction performance for small reducer")
+            let reduction = self.largeArray.stream().reduce(identity: 0, merger: self.smallReducer, reducer: self.smallReducer).wait()
+            print(reduction)
+        }
+    }
+
+    let largeReducer: (Int, Int) -> Int = {
+        usleep(100)
+        return $0 + $1
+    }
+    func testSerialReductionPerformanceForLargeReducer() {
+        self.measureBlock {
+            print("Testing serial reduction performance for large reducer")
+            let reduction = self.largeArray.stream().reduce(0, reducer: self.largeReducer).wait()
+            print(reduction)
+        }
+    }
+
+    func testConcurrentReductionPerformanceForLargeReducer() {
+        self.measureBlock {
+            print("Testing concurrent reduction performance for large reducer")
+            let reduction = self.largeArray.stream().reduce(identity: 0, merger: self.largeReducer, reducer: self.largeReducer).wait()
             print(reduction)
         }
     }

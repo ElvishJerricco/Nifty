@@ -80,40 +80,35 @@ public extension Stream {
         return Stream<T> { (_,_,_) in {} }
     }
 
-    public func forEach(queue: DispatchQueue = Dispatch.globalQueue, handler: T -> ()) -> DispatchGroup {
+    public func forEach(queue: DispatchQueue = Dispatch.globalQueue, handler: T -> ()) -> Future<()> {
         let group = DispatchGroup()
         self.makeTrigger(queue, group, handler)()
-        return group
+        return group.future(queue) { }
     }
 
     public func reduce<Reduced>(
-        initial: Reduced,
+        identity identity: Reduced,
         merger: (Reduced, Reduced) -> Reduced,
         queue: DispatchQueue = Dispatch.globalQueue,
         reducer: (Reduced, T) -> Reduced
     ) -> Future<Reduced> {
-        let reducingLock = DispatchQueue("Nifty.Stream.reduce.reducingLock")
-        var availableReduced: Reduced? = initial
-
-        return self.forEach(queue) { t in
-            let reduced = reducingLock.future { () -> Reduced in
-                if let r = availableReduced {
-                    availableReduced = nil
-                    return r
+        let availableReduced = Lock([Reduced]())
+        return self.forEach(queue) { element in
+            let reduced: Reduced = availableReduced.acquire { (inout available: [Reduced]) in
+                if available.count > 0 {
+                    return available.removeLast()
                 } else {
-                    return initial
+                    return identity
                 }
             }.wait()
-            let newReduced = reducer(reduced, t)
-            reducingLock.async {
-                if let r = availableReduced {
-                    availableReduced = merger(r, newReduced)
-                } else {
-                    availableReduced = newReduced
-                }
+            let newReduced = reducer(reduced, element)
+            availableReduced.acquire { (inout available: [Reduced]) in
+                available.append(newReduced)
             }
-        }.future(reducingLock) {
-            return availableReduced ?? initial
+        }.flatMap { _ in
+            return availableReduced.get()
+        }.map {
+            return $0.reduce(identity, combine: merger)
         }
     }
 
@@ -130,8 +125,8 @@ public extension Stream {
             reducingQueue.async {
                 reduced = reducer(reduced, t)
             }
-        }.future(reducingQueue) {
-            return reduced
+        }.flatMap { _ in
+            return reducingQueue.future { reduced }
         }
     }
 
