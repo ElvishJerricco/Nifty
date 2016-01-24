@@ -16,9 +16,9 @@ public class EventStreamWriter<T> {
 
     public func writeEvent(t: T, queue: DispatchQueue = Dispatch.globalQueue) -> Future<()> {
         let group = DispatchGroup()
-        for handler in handlers {
-            queue.async(group) {
-                handler(t)
+        Dispatch.globalQueue.async(group) {
+            queue.apply(self.handlers.count) { index in
+                self.handlers[index](t)
             }
         }
         return group.future(queue) { }
