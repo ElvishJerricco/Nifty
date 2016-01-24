@@ -55,7 +55,7 @@ class StreamPerformanceTests: XCTestCase {
         self.measureBlock {
             print("Testing serial reduction performance for small reducer")
             let reduction = self.largeArray.stream().reduce(0, reducer: self.smallReducer).wait()
-            print(reduction)
+            XCTAssert(reduction == 1249975000)
         }
     }
 
@@ -63,7 +63,7 @@ class StreamPerformanceTests: XCTestCase {
         self.measureBlock {
             print("Testing concurrent reduction performance for small reducer")
             let reduction = self.largeArray.stream().reduce(identity: 0, merger: self.smallReducer, reducer: self.smallReducer).wait()
-            print(reduction)
+            XCTAssert(reduction == 1249975000)
         }
     }
 
@@ -75,7 +75,7 @@ class StreamPerformanceTests: XCTestCase {
         self.measureBlock {
             print("Testing serial reduction performance for large reducer")
             let reduction = self.largeArray.stream().reduce(0, reducer: self.largeReducer).wait()
-            print(reduction)
+            XCTAssert(reduction == 1249975000)
         }
     }
 
@@ -83,7 +83,7 @@ class StreamPerformanceTests: XCTestCase {
         self.measureBlock {
             print("Testing concurrent reduction performance for large reducer")
             let reduction = self.largeArray.stream().reduce(identity: 0, merger: self.largeReducer, reducer: self.largeReducer).wait()
-            print(reduction)
+            XCTAssert(reduction == 1249975000)
         }
     }
 }
