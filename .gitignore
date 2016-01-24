@@ -1,8 +1,4 @@
-## Dependencies
-Packages
-
 ## Build generated
-.build
 build/
 DerivedData
 
@@ -21,3 +17,18 @@ xcuserdata
 *.xccheckout
 *.moved-aside
 *.xcuserstate
+*.xcscmblueprint
+
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+#
+# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
+Packages/
+.build/
