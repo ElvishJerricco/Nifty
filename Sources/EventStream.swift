@@ -14,14 +14,14 @@ public class EventStreamWriter<T> {
         handlers.append(handler)
     }
 
-    public func writeEvent(t: T, queue: DispatchQueue = Dispatch.globalQueue) -> DispatchGroup {
+    public func writeEvent(t: T, queue: DispatchQueue = Dispatch.globalQueue) -> Future<()> {
         let group = DispatchGroup()
         for handler in handlers {
             queue.async(group) {
                 handler(t)
             }
         }
-        return group
+        return group.future(queue) { }
     }
 
     public var stream: EventStream<T> {
