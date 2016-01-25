@@ -105,6 +105,7 @@ public extension Stream {
         reducer: (Reduced, T) -> Reduced
     ) -> Future<Reduced> {
         let availableReduced = Lock([Reduced]())
+
         return self.forEach(queue) { element in
             let reduced: Reduced = availableReduced.acquire { (inout available: [Reduced]) in
                 if available.count > 0 {
@@ -114,12 +115,10 @@ public extension Stream {
                 }
             }.wait()
             let newReduced = reducer(reduced, element)
-            availableReduced.acquire { (inout available: [Reduced]) in
-                available.append(newReduced)
+            availableReduced.mutate { available in
+                return available + newReduced
             }
-        }.flatMap {
-            return availableReduced.get()
-        }.map {
+        }.flatMap(availableReduced.get).map {
             return $0.reduce(identity, combine: merger)
         }
     }
@@ -129,17 +128,13 @@ public extension Stream {
         queue: DispatchQueue = Dispatch.globalQueue,
         reducer: (Reduced, T) -> Reduced
     ) -> Future<Reduced> {
-        let reducingQueue = DispatchQueue("Nifty.Stream.reduce.reducingQueue")
-        reducingQueue.setTargetQueue(queue)
-        var reduced = initial
+        let reducedLock = Lock(initial)
 
         return self.forEach(queue) { t in
-            reducingQueue.async {
-                reduced = reducer(reduced, t)
+            reducedLock.mutate { reduced in
+                return reducer(reduced, t)
             }
-        }.flatMap {
-            return reducingQueue.future { reduced }
-        }
+        }.flatMap(reducedLock.get)
     }
 
     public func filter(predicate: T -> Bool) -> Stream<T> {
