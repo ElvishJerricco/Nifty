@@ -65,6 +65,22 @@ public func >>==<T, U>(stream: Stream<T>, f: T -> Stream<U>) -> Stream<U> {
     return stream.flatMap(f)
 }
 
+// Monoid
+
+public extension Stream {
+    public static func empty<T>() -> Stream<T> {
+        return Stream<T> { (_,_,_) in {} }
+    }
+
+    public func appended(other: Stream<T>) -> Stream<T> {
+        return Stream.concat(self, other)
+    }
+}
+
+public func +<T>(a: Stream<T>, b: Stream<T>) -> Stream<T> {
+    return a.appended(b)
+}
+
 // Util
 
 public extension Stream {
@@ -74,10 +90,6 @@ public extension Stream {
 
     public static func concat<T>(streams: Stream<T>...) -> Stream<T> {
         return Stream.concat(streams.stream())
-    }
-
-    public static func empty<T>() -> Stream<T> {
-        return Stream<T> { (_,_,_) in {} }
     }
 
     public func forEach(queue: DispatchQueue = Dispatch.globalQueue, handler: T -> ()) -> Future<()> {
