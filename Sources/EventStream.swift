@@ -10,6 +10,9 @@ import DispatchKit
 public class EventStreamWriter<T> {
     private var handlers: [T -> ()] = []
 
+    public init() {
+    }
+
     public func addHandler(handler: T -> ()) {
         handlers.append(handler)
     }
