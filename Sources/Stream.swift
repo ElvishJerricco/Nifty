@@ -42,7 +42,7 @@ public func <*><A, B>(f: Stream<A -> B>, a: Stream<A>) -> Stream<B> {
 // Monad
 
 public extension Stream {
-    public static func point<T>(tElement: T) -> Stream<T> {
+    public static func of<T>(tElement: T) -> Stream<T> {
         return Stream<T> { queue, group, tHandler in
             return {
                 queue.async(group) {
@@ -174,6 +174,6 @@ public extension CollectionType where Self.Index.Distance == Int {
 
 public extension Optional {
     public func stream() -> Stream<Wrapped> {
-        return self.map(Stream<Wrapped>.point) ?? Stream<Wrapped>.empty()
+        return self.map(Stream<Wrapped>.of) ?? Stream<Wrapped>.empty()
     }
 }

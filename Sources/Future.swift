@@ -99,7 +99,7 @@ public func <*><A, B>(f: Future<A -> B>, a: Future<A>) -> Future<B> {
 // Monad
 
 public extension Future {
-    public static func point<T>(t: T) -> Future<T> {
+    public static func of<T>(t: T) -> Future<T> {
         let promise = Promise<T>()
         promise.complete(t)
         return promise.future

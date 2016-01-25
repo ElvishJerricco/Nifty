@@ -42,7 +42,7 @@ public func <*><L, A, B>(f: Either<L, A -> B>, a: Either<L, A>) -> Either<L, B> 
 // Monad (Right)
 
 public extension Either {
-    public static func point<L, R>(r: R) -> Either<L, R> {
+    public static func of<L, R>(r: R) -> Either<L, R> {
         return .Right(r)
     }
 
@@ -84,7 +84,7 @@ public extension Either {
 // Monad (Left)
 
 public extension Either {
-    public static func leftPoint<L, R>(l: L) -> Either<L, R> {
+    public static func leftOf<L, R>(l: L) -> Either<L, R> {
         return .Left(l)
     }
 

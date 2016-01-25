@@ -62,7 +62,7 @@ public func <*><A, B>(f: EventStream<A -> B>, a: EventStream<A>) -> EventStream<
 // Monad
 
 public extension EventStream {
-    public static func point<T>(t: T) -> EventStream<T> {
+    public static func of<T>(t: T) -> EventStream<T> {
         return EventStream<T> { handler in
             handler(t)
         }
