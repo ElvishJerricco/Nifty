@@ -117,7 +117,7 @@ public extension Stream {
             availableReduced.acquire { (inout available: [Reduced]) in
                 available.append(newReduced)
             }
-        }.flatMap { _ in
+        }.flatMap {
             return availableReduced.get()
         }.map {
             return $0.reduce(identity, combine: merger)
@@ -137,7 +137,7 @@ public extension Stream {
             reducingQueue.async {
                 reduced = reducer(reduced, t)
             }
-        }.flatMap { _ in
+        }.flatMap {
             return reducingQueue.future { reduced }
         }
     }
