@@ -8,18 +8,18 @@
 import DispatchKit
 
 public class Promise<T> {
-    private var state: Either<T, [(T, DispatchQueue) -> ()]> = .Right([])
+    private var state: Either<T, [T -> ()]> = .Right([])
     private let completionQueue: DispatchQueue = DispatchQueue("Nifty.Promise.completionQueue") // serial queue
     
     public init() {
     }
     
-    private func onComplete(handler: (T, DispatchQueue) -> ()) {
+    private func onComplete(handler: T -> ()) {
         completionQueue.async {
             switch self.state {
             case .Left(let completed):
                 Dispatch.globalQueue.async {
-                    handler(completed, Dispatch.globalQueue)
+                    handler(completed)
                 }
             case .Right(let handlers):
                 self.state = .Right(handlers + handler)
@@ -43,40 +43,28 @@ public class Promise<T> {
                     // CompletionQueue is never handed out to become targeted, nor is its target set.
                     // It does have an implicit target of some global queue.
                     // But global queues are always concurrent, so they won't cause this deadlock.
-                    handlers[index](t, queue)
+                    handlers[index](t)
                 }
             }
         }
     }
     
     public var future: Future<T> {
-        return Future(promise: self)
+        return Future(onComplete: self.onComplete)
     }
 }
 
 public struct Future<T> {
-    private let promise: Promise<T>
-    
-    private init(promise: Promise<T>) {
-        self.promise = promise
-    }
-    
-    public func onComplete(handler: (T, DispatchQueue) -> ()) {
-        promise.onComplete(handler)
-    }
+    public let onComplete: (T -> ()) -> ()
 }
 
 // Functor
 
 public extension Future {
     public func map<U>(f: T -> U) -> Future<U> {
-        let uPromise = Promise<U>()
-
-        onComplete { t, queue in
-            uPromise.complete(f(t), queue: queue)
+        return Future<U> { handler in
+            self.onComplete(handler * f)
         }
-
-        return uPromise.future
     }
 }
 
@@ -100,19 +88,17 @@ public func <*><A, B>(f: Future<A -> B>, a: Future<A>) -> Future<B> {
 
 public extension Future {
     public static func of<T>(t: T) -> Future<T> {
-        let promise = Promise<T>()
-        promise.complete(t)
-        return promise.future
+        return Future<T> { handler in
+            handler(t)
+        }
     }
 
     public func flatMap<U>(f: T -> Future<U>) -> Future<U> {
-        let uPromise = Promise<U>()
-
-        onComplete { t, _ in
-            f(t).onComplete(uPromise.complete)
+        return Future<U> { handler in
+            self.onComplete { t in
+                f(t).onComplete(handler)
+            }
         }
-
-        return uPromise.future
     }
 }
 
@@ -162,7 +148,7 @@ public extension Future {
         var t: T? = nil
         let semaphore = DispatchSemaphore(0)
         
-        onComplete { completed, _ in
+        onComplete { completed in
             t = completed
             semaphore.signal()
         }
