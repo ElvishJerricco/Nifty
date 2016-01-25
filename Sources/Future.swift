@@ -8,8 +8,7 @@
 import DispatchKit
 
 public class Promise<T> {
-    private var handlers: [(T, DispatchQueue) -> ()] = []
-    private var completed: T? = nil
+    private var state: Either<T, [(T, DispatchQueue) -> ()]> = .Right([])
     private let completionQueue: DispatchQueue = DispatchQueue("Nifty.Promise.completionQueue") // serial queue
     
     public init() {
@@ -17,35 +16,36 @@ public class Promise<T> {
     
     private func onComplete(handler: (T, DispatchQueue) -> ()) {
         completionQueue.async {
-            if let completed = self.completed {
-                handler(completed, self.completionQueue)
-            } else {
-                self.handlers.append(handler)
+            switch self.state {
+            case .Left(let completed):
+                Dispatch.globalQueue.async {
+                    handler(completed, Dispatch.globalQueue)
+                }
+            case .Right(let handlers):
+                self.state = .Right(handlers + handler)
             }
         }
     }
     
     public func complete(t: T, queue: DispatchQueue = Dispatch.globalQueue) {
         completionQueue.async {
-            if self.completed != nil {
-                return
+            switch self.state {
+            case .Left:
+                fatalError("Attempted to complete completed promise")
+            case .Right(let handlers):
+                self.state = .Left(t)
+                // queue.apply is blocking
+                queue.apply(handlers.count) { index in
+                    // Note: There is a potential deadlock here at queue.apply when queue targets completionQueue.
+                    // This is because completionQueue is serial, so queue can't have blocks running at this time.
+                    // The same deadlock would be caused when completionQueue targets queue if queue is serial.
+                    // However, this deadlock IS NOT possible.
+                    // CompletionQueue is never handed out to become targeted, nor is its target set.
+                    // It does have an implicit target of some global queue.
+                    // But global queues are always concurrent, so they won't cause this deadlock.
+                    handlers[index](t, queue)
+                }
             }
-
-            self.completed = t
-            // queue.apply is blocking
-            queue.apply(self.handlers.count) { index in
-                // Note: There is a potential deadlock here at queue.apply when queue targets completionQueue.
-                // This is because completionQueue is serial, so queue can't have blocks running at this time.
-                // The same deadlock would be caused when completionQueue targets queue if queue is serial.
-                // However, this deadlock IS NOT possible.
-                // CompletionQueue is never handed out to become targeted, nor is its target set.
-                // It does have an implicit target of some global queue.
-                // But global queues are always concurrent, so they won't cause this deadlock.
-                self.handlers[index](t, queue)
-            }
-
-            // Dealloc unneeded resources.
-            self.handlers = []
         }
     }
     
