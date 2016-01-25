@@ -6,14 +6,40 @@
 	<dict>
 		<key>StreamPerformanceTests</key>
 		<dict>
+			<key>testCollectionReductionPerformanceForLargeReducer()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>6.769</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Local Baseline</string>
+					<key>maxPercentRelativeStandardDeviation</key>
+					<real>20</real>
+				</dict>
+			</dict>
+			<key>testCollectionReductionPerformanceForSmallReducer()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.535</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Local Baseline</string>
+					<key>maxPercentRelativeStandardDeviation</key>
+					<real>20</real>
+				</dict>
+			</dict>
 			<key>testConcurrentReductionPerformanceForLargeReducer()</key>
 			<dict>
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>1.3732</real>
+					<real>1.373</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
+					<key>maxPercentRelativeStandardDeviation</key>
+					<real>20</real>
 				</dict>
 			</dict>
 			<key>testConcurrentReductionPerformanceForSmallReducer()</key>
@@ -21,9 +47,11 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>1.14</real>
+					<real>0.954</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
+					<key>maxPercentRelativeStandardDeviation</key>
+					<real>20</real>
 				</dict>
 			</dict>
 			<key>testConcurrentStreamPerformance()</key>
@@ -31,9 +59,11 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.073426</real>
+					<real>0.073</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
+					<key>maxPercentRelativeStandardDeviation</key>
+					<real>20</real>
 				</dict>
 			</dict>
 			<key>testSerialReductionPerformanceForLargeReducer()</key>
@@ -41,9 +71,11 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>6.8499</real>
+					<real>6.85</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
+					<key>maxPercentRelativeStandardDeviation</key>
+					<real>20</real>
 				</dict>
 			</dict>
 			<key>testSerialReductionPerformanceForSmallReducer()</key>
@@ -51,9 +83,11 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.39</real>
+					<real>0.665</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
+					<key>maxPercentRelativeStandardDeviation</key>
+					<real>20</real>
 				</dict>
 			</dict>
 			<key>testSerialStreamPerformance()</key>
@@ -61,9 +95,11 @@
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
 				<dict>
 					<key>baselineAverage</key>
-					<real>0.309</real>
+					<real>0.306</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
+					<key>maxPercentRelativeStandardDeviation</key>
+					<real>20</real>
 				</dict>
 			</dict>
 		</dict>
