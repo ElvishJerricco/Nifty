@@ -10,27 +10,12 @@ import DispatchKit
 @testable import Nifty
 
 class StreamPerformanceTests: XCTestCase {
-    var largeArray = [Int]()
-
-    override func setUp() {
-        super.setUp()
-
-        self.largeArray = [Int](count: 50000, repeatedValue: 0)
-        for i in 0..<50000 {
-            self.largeArray[i] = i
-        }
-    }
-
-    override func tearDown() {
-        self.largeArray = []
-
-        super.tearDown()
-    }
+    var largeStream = (0..<50000).stream()
 
     func testSerialStreamPerformance() {
         self.measureBlock {
             print("Testing serial stream performance")
-            self.largeArray.stream().forEach(DispatchQueue("")) { _ in
+            self.largeStream.forEach(DispatchQueue("")) { _ in
                 // Simulate long running operation
                 usleep(1)
             }.wait()
@@ -40,7 +25,7 @@ class StreamPerformanceTests: XCTestCase {
     func testConcurrentStreamPerformance() {
         self.measureBlock {
             print("Testing concurrent stream performance")
-            self.largeArray.stream().forEach { _ in
+            self.largeStream.forEach { _ in
                 // Simulate long running operation
                 usleep(1)
             }.wait()
@@ -54,7 +39,7 @@ class StreamPerformanceTests: XCTestCase {
     func testSerialReductionPerformanceForSmallReducer() {
         self.measureBlock {
             print("Testing serial reduction performance for small reducer")
-            let reduction = self.largeArray.stream().reduce(0, reducer: self.smallReducer).wait()
+            let reduction = self.largeStream.reduce(0, reducer: self.smallReducer).wait()
             XCTAssert(reduction == 1249975000)
         }
     }
@@ -62,7 +47,7 @@ class StreamPerformanceTests: XCTestCase {
     func testConcurrentReductionPerformanceForSmallReducer() {
         self.measureBlock {
             print("Testing concurrent reduction performance for small reducer")
-            let reduction = self.largeArray.stream().reduce(identity: 0, merger: self.smallReducer, reducer: self.smallReducer).wait()
+            let reduction = self.largeStream.reduce(identity: 0, merger: self.smallReducer, reducer: self.smallReducer).wait()
             XCTAssert(reduction == 1249975000)
         }
     }
@@ -74,7 +59,7 @@ class StreamPerformanceTests: XCTestCase {
     func testSerialReductionPerformanceForLargeReducer() {
         self.measureBlock {
             print("Testing serial reduction performance for large reducer")
-            let reduction = self.largeArray.stream().reduce(0, reducer: self.largeReducer).wait()
+            let reduction = self.largeStream.reduce(0, reducer: self.largeReducer).wait()
             XCTAssert(reduction == 1249975000)
         }
     }
@@ -82,7 +67,7 @@ class StreamPerformanceTests: XCTestCase {
     func testConcurrentReductionPerformanceForLargeReducer() {
         self.measureBlock {
             print("Testing concurrent reduction performance for large reducer")
-            let reduction = self.largeArray.stream().reduce(identity: 0, merger: self.largeReducer, reducer: self.largeReducer).wait()
+            let reduction = self.largeStream.reduce(identity: 0, merger: self.largeReducer, reducer: self.largeReducer).wait()
             XCTAssert(reduction == 1249975000)
         }
     }
