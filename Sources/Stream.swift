@@ -169,3 +169,11 @@ public extension CollectionType where Self.Index.Distance == Int {
         }
     }
 }
+
+// Optionals
+
+public extension Optional {
+    public func stream() -> Stream<Wrapped> {
+        return self.map(Stream<Wrapped>.point) ?? Stream<Wrapped>.empty()
+    }
+}
