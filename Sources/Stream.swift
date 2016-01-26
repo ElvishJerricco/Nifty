@@ -10,7 +10,8 @@ import DispatchKit
 public typealias Trigger = () -> ()
 
 public struct Stream<T> {
-    public let makeTrigger: (DispatchQueue, DispatchGroup, T -> ()) -> Trigger
+    public typealias Handler = T -> ()
+    public let makeTrigger: (DispatchQueue, DispatchGroup, Handler) -> Trigger
 }
 
 // Functor
@@ -92,7 +93,7 @@ public extension Stream {
         return Stream.concat(streams.stream())
     }
 
-    public func forEach(queue: DispatchQueue = Dispatch.globalQueue, handler: T -> ()) -> Future<()> {
+    public func forEach(queue: DispatchQueue = Dispatch.globalQueue, handler: Handler) -> Future<()> {
         let group = DispatchGroup()
         self.makeTrigger(queue, group, handler)()
         return group.future(queue) { }
