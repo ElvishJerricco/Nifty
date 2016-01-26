@@ -99,6 +99,20 @@ public extension Stream {
         return group.future(queue) { }
     }
 
+    public func filter(predicate: T -> Bool) -> Stream<T> {
+        return Stream { queue, group, tHandler in
+            return self.makeTrigger(queue, group) { t in
+                if predicate(t) {
+                    tHandler(t)
+                }
+            }
+        }
+    }
+}
+
+// Reduce
+
+public extension Stream {
     public func reduce<Reduced>(
         identity identity: Reduced,
         merger: (Reduced, Reduced) -> Reduced,
@@ -136,16 +150,6 @@ public extension Stream {
                 return reducer(reduced, t)
             }
         }.flatMap(reducedLock.get)
-    }
-
-    public func filter(predicate: T -> Bool) -> Stream<T> {
-        return Stream { queue, group, tHandler in
-            return self.makeTrigger(queue, group) { t in
-                if predicate(t) {
-                    tHandler(t)
-                }
-            }
-        }
     }
 }
 
