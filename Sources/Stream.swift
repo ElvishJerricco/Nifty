@@ -7,20 +7,21 @@
 
 import DispatchKit
 
-public typealias Trigger = () -> ()
-
 public struct Stream<T> {
-    public typealias Handler = T -> ()
-    public let makeTrigger: (DispatchQueue, DispatchGroup, Handler) -> Trigger
+    public let cont: Continuation<Future<()>, T>
+    public init(_ cont: Continuation<Future<()>, T>) {
+        self.cont = cont
+    }
+    public init(_ cont: (T -> Future<()>) -> Future<()>) {
+        self.cont = Continuation(cont)
+    }
 }
 
 // Functor
 
 public extension Stream {
     public func map<U>(f: T -> U) -> Stream<U> {
-        return Stream<U> { queue, group, uHandler in
-            return self.makeTrigger(queue, group, uHandler * f)
-        }
+        return Stream<U>(self.cont.map(f))
     }
 }
 
@@ -36,29 +37,21 @@ public extension Stream {
     }
 }
 
-public func <*><A, B>(f: Stream<A -> B>, a: Stream<A>) -> Stream<B> {
-    return a.apply(f)
+public func <*><T, U>(f: Stream<T -> U>, stream: Stream<T>) -> Stream<U> {
+    return stream.apply(f)
 }
 
 // Monad
 
 public extension Stream {
-    public static func of<T>(tElement: T) -> Stream<T> {
-        return Stream<T> { queue, group, tHandler in
-            return {
-                queue.async(group) {
-                    tHandler(tElement)
-                }
-            }
-        }
+    public static func of<T>(t: T) -> Stream<T> {
+        return Stream<T>(Continuation.of(t))
     }
 
     public func flatMap<U>(f: T -> Stream<U>) -> Stream<U> {
-        return Stream<U> { queue, group, uHandler in
-            return self.makeTrigger(queue, group) { t in
-                f(t).makeTrigger(queue, group, uHandler)()
-            }
-        }
+        return Stream<U>(self.cont.flatMap {
+            return f($0).cont
+        })
     }
 }
 
@@ -70,11 +63,13 @@ public func >>==<T, U>(stream: Stream<T>, f: T -> Stream<U>) -> Stream<U> {
 
 public extension Stream {
     public static func empty<T>() -> Stream<T> {
-        return Stream<T> { (_,_,_) in {} }
+        return Stream<T>(Continuation { _ in Future<()>.of() })
     }
 
     public func appended(other: Stream<T>) -> Stream<T> {
-        return Stream.concat(self, other)
+        return Stream(Continuation { k in
+            return { { } } <^> self.cont.run(k) <*> other.cont.run(k)
+        })
     }
 }
 
@@ -93,18 +88,19 @@ public extension Stream {
         return Stream.concat(streams.stream())
     }
 
-    public func forEach(queue: DispatchQueue = Dispatch.globalQueue, handler: Handler) -> Future<()> {
-        let group = DispatchGroup()
-        self.makeTrigger(queue, group, handler)()
-        return group.future(queue) { }
+    public func forEach(handler: T -> ()) -> Future<()> {
+        return self.cont.run {
+            handler($0)
+            return Future<()>.of()
+        }
     }
 
     public func filter(predicate: T -> Bool) -> Stream<T> {
-        return Stream { queue, group, tHandler in
-            return self.makeTrigger(queue, group) { t in
-                if predicate(t) {
-                    tHandler(t)
-                }
+        return self.flatMap { t in
+            if predicate(t) {
+                return Stream.of(t)
+            } else {
+                return Stream.empty()
             }
         }
     }
@@ -116,12 +112,11 @@ public extension Stream {
     public func reduce<Reduced>(
         identity identity: Reduced,
         merger: (Reduced, Reduced) -> Reduced,
-        queue: DispatchQueue = Dispatch.globalQueue,
         reducer: (Reduced, T) -> Reduced
     ) -> Future<Reduced> {
         let availableReduced = Lock([Reduced]())
 
-        return self.forEach(queue) { element in
+        return self.forEach { element in
             let reduced: Reduced = availableReduced.acquire { (inout available: [Reduced]) in
                 if available.count > 0 {
                     return available.removeLast()
@@ -140,12 +135,11 @@ public extension Stream {
 
     public func reduce<Reduced>(
         initial: Reduced,
-        queue: DispatchQueue = Dispatch.globalQueue,
         reducer: (Reduced, T) -> Reduced
     ) -> Future<Reduced> {
         let reducedLock = Lock(initial)
 
-        return self.forEach(queue) { t in
+        return self.forEach { t in
             reducedLock.mutate { reduced in
                 return reducer(reduced, t)
             }
@@ -153,19 +147,20 @@ public extension Stream {
     }
 }
 
-// Collections
-
 public extension CollectionType where Self.Index.Distance == Int {
-    public func stream() -> Stream<Self.Generator.Element> {
-        return Stream { queue, group, handler in
-            return {
-                // DispatchQueue.apply is blocking, so put it in the background
-                Dispatch.globalQueue.async(group) {
-                    queue.apply(self.count) { index in
-                        handler(self[self.startIndex.advancedBy(index)])
-                    }
+    public func stream(queue: DispatchQueue = Dispatch.globalQueue) -> Stream<Self.Generator.Element> {
+        return Stream { handler in
+            let semaphore = DispatchSemaphore(0)
+            let group = DispatchGroup()
+            Dispatch.globalQueue.async(group) {
+                queue.apply(self.count) { index in
+                    handler(self[self.startIndex.advancedBy(index)]).onComplete { semaphore.signal() }
+                }
+                for _ in 0..<self.count {
+                    semaphore.wait()
                 }
             }
+            return group.future(queue) { }
         }
     }
 }
