@@ -19,19 +19,19 @@ infix operator >>== { associativity left }
 
 // compose
 
-func *<A, B, C>(g: B -> C, f: A -> B) -> A -> C {
+public func *<A, B, C>(g: B -> C, f: A -> B) -> A -> C {
     return { a in g(f(a)) }
 }
 
 // Append element to array
 
-func +<T>(element: T, array: [T]) -> [T] {
+public func +<T>(element: T, array: [T]) -> [T] {
     var array = array
     array.insert(element, atIndex: 0)
     return array
 }
 
-func +<T>(array: [T], element: T) -> [T] {
+public func +<T>(array: [T], element: T) -> [T] {
     var array = array
     array.append(element)
     return array
