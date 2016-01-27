@@ -80,12 +80,16 @@ public func +<T>(a: Stream<T>, b: Stream<T>) -> Stream<T> {
 // Util
 
 public extension Stream {
-    public static func concat<T>(streams: Stream<Stream<T>>) -> Stream<T> {
+    public static func join<T>(streams: Stream<Stream<T>>) -> Stream<T> {
         return streams.flatMap { $0 }
     }
 
+    public static func concat<T>(streams: [Stream<T>]) -> Stream<T> {
+        return Stream.join(streams.stream())
+    }
+
     public static func concat<T>(streams: Stream<T>...) -> Stream<T> {
-        return Stream.concat(streams.stream())
+        return Stream.concat(streams)
     }
 
     public func forEach(handler: T -> ()) -> Future<()> {
