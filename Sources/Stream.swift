@@ -67,9 +67,7 @@ public extension Stream {
     }
 
     public func appended(other: Stream<T>) -> Stream<T> {
-        return Stream(Continuation { k in
-            return { { } } <^> self.cont.run(k) <*> other.cont.run(k)
-        })
+        return Stream.concat(self, other)
     }
 }
 
