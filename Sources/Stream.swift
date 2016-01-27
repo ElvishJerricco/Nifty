@@ -156,6 +156,7 @@ public extension CollectionType where Self.Index.Distance == Int {
                 queue.apply(self.count) { index in
                     handler(self[self.startIndex.advancedBy(index)]).onComplete { semaphore.signal() }
                 }
+                // Wait for every single iteration to signal.
                 for _ in 0..<self.count {
                     semaphore.wait()
                 }
