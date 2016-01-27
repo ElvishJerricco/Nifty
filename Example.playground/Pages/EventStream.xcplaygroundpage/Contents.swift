@@ -1,23 +1,20 @@
 //: [Previous](@previous)
 import Nifty
 
-let xWriter = EventStreamWriter<Int>()
-let yWriter = EventStreamWriter<Int>()
+let x = EventStreamWriter<Int>()
+let y = EventStreamWriter<Int>()
 
-let x = xWriter.stream
-let y = yWriter.stream
-
-let z = curry { ($0, $1) } <^> x <*> y
+let z = curry { ($0, $1) } <^> x.stream <*> y.stream
 
 z.addHandler { i in
     print(i)
 }
 
-xWriter.writeEvent(1)
-xWriter.writeEvent(3)
-xWriter.writeEvent(5)
+x.writeEvent(1).wait()
+x.writeEvent(3).wait()
+x.writeEvent(5).wait()
 
-yWriter.writeEvent(2)
-yWriter.writeEvent(4)
-yWriter.writeEvent(6)
+y.writeEvent(2).wait()
+y.writeEvent(4).wait()
+y.writeEvent(6).wait()
 //: [Next](@next)
