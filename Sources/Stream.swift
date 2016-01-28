@@ -32,8 +32,8 @@ public func <^><T, U>(f: T -> U, stream: Stream<T>) -> Stream<U> {
 // Applicative
 
 public extension Stream {
-    public func apply<U>(f: Stream<T -> U>) -> Stream<U> {
-        return f.flatMap(self.map)
+    public func apply<U>(mappers: Stream<T -> U>) -> Stream<U> {
+        return Stream<U>(self.cont.apply(mappers.cont))
     }
 }
 
