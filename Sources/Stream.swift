@@ -152,9 +152,9 @@ public extension Stream {
 public extension CollectionType where Self.Index.Distance == Int {
     public func stream(queue: DispatchQueue = Dispatch.globalQueue) -> Stream<Self.Generator.Element> {
         return Stream { handler in
-            let semaphore = DispatchSemaphore(0)
             let group = DispatchGroup()
             Dispatch.globalQueue.async(group) {
+                let semaphore = DispatchSemaphore(0)
                 queue.apply(self.count) { index in
                     handler(self[self.startIndex.advancedBy(index)]).onComplete { semaphore.signal() }
                 }
