@@ -50,21 +50,25 @@ public class Promise<T> {
     }
     
     public var future: Future<T> {
-        return Future(onComplete: self.onComplete)
+        return Future(Continuation(self.onComplete))
     }
 }
 
 public struct Future<T> {
-    public let onComplete: (T -> ()) -> ()
+    public let cont: Continuation<(), T>
+    public init(_ cont: Continuation<(), T>) {
+        self.cont = cont
+    }
+    public init(_ cont: (T -> ()) -> ()) {
+        self.cont = Continuation(cont)
+    }
 }
 
 // Functor
 
 public extension Future {
     public func map<U>(f: T -> U) -> Future<U> {
-        return Future<U> { handler in
-            self.onComplete(handler * f)
-        }
+        return Future<U>(self.cont.map(f))
     }
 }
 
@@ -76,7 +80,7 @@ public func <^><T, U>(f: T -> U, future: Future<T>) -> Future<U> {
 
 public extension Future {
     public func apply<U>(futureFunc: Future<T -> U>) -> Future<U> {
-        return futureFunc.flatMap(self.map)
+        return Future<U>(self.cont.apply(futureFunc.cont))
     }
 }
 
@@ -88,22 +92,24 @@ public func <*><A, B>(f: Future<A -> B>, a: Future<A>) -> Future<B> {
 
 public extension Future {
     public static func of<T>(t: T) -> Future<T> {
-        return Future<T> { handler in
-            handler(t)
-        }
+        return Future<T>(Continuation.of(t))
     }
 
     public func flatMap<U>(f: T -> Future<U>) -> Future<U> {
-        return Future<U> { handler in
-            self.onComplete { t in
-                f(t).onComplete(handler)
-            }
-        }
+        return Future<U>(self.cont.flatMap({$0.cont} * f))
     }
 }
 
 public func >>==<T, U>(future: Future<T>, f: T -> Future<U>) -> Future<U> {
     return future.flatMap(f)
+}
+
+// Run
+
+public extension Future {
+    public func onComplete(handler: T -> ()) {
+        cont.run(handler)
+    }
 }
 
 // Dispatch Integration

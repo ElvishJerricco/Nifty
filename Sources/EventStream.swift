@@ -28,21 +28,25 @@ public class EventStreamWriter<T> {
     }
 
     public var stream: EventStream<T> {
-        return EventStream(addHandler: self.addHandler)
+        return EventStream(self.addHandler)
     }
 }
 
 public struct EventStream<T> {
-    public let addHandler: (T -> ()) -> ()
+    public let cont: Continuation<(), T>
+    public init(_ cont: Continuation<(), T>) {
+        self.cont = cont
+    }
+    public init(_ cont: (T -> ()) -> ()) {
+        self.cont = Continuation(cont)
+    }
 }
 
 // Functor
 
 public extension EventStream {
     public func map<U>(f: T -> U) -> EventStream<U> {
-        return EventStream<U> { handler in
-            self.addHandler(handler * f)
-        }
+        return EventStream<U>(self.cont.map(f))
     }
 }
 
@@ -54,7 +58,7 @@ public func <^><T, U>(f: T -> U, stream: EventStream<T>) -> EventStream<U> {
 
 public extension EventStream {
     public func apply<U>(fn: EventStream<T -> U>) -> EventStream<U> {
-        return fn.flatMap(self.map)
+        return EventStream<U>(self.cont.apply(fn.cont))
     }
 }
 
@@ -66,17 +70,11 @@ public func <*><A, B>(f: EventStream<A -> B>, a: EventStream<A>) -> EventStream<
 
 public extension EventStream {
     public static func of<T>(t: T) -> EventStream<T> {
-        return EventStream<T> { handler in
-            handler(t)
-        }
+        return EventStream<T>(Continuation.of(t))
     }
 
     public func flatMap<U>(f: T -> EventStream<U>) -> EventStream<U> {
-        return EventStream<U> { handler in
-            self.addHandler { t in
-                f(t).addHandler(handler)
-            }
-        }
+        return EventStream<U>(self.cont.flatMap({$0.cont} * f))
     }
 }
 
@@ -101,4 +99,12 @@ public extension EventStream {
 
 public func +<T>(a: EventStream<T>, b: EventStream<T>) -> EventStream<T> {
     return a.appended(b)
+}
+
+// Run
+
+public extension EventStream {
+    public func addHandler(handler: T -> ()) {
+        self.cont.run(handler)
+    }
 }
