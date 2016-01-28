@@ -48,10 +48,8 @@ public extension Stream {
         return Stream<T>(Continuation.of(t))
     }
 
-    public func flatMap<U>(f: T -> Stream<U>) -> Stream<U> {
-        return Stream<U>(self.cont.flatMap {
-            return f($0).cont
-        })
+    public func flatMap<U>(mapper: T -> Stream<U>) -> Stream<U> {
+        return Stream<U>(self.cont.flatMap({$0.cont} * mapper))
     }
 }
 
