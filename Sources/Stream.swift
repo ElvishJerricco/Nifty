@@ -98,9 +98,9 @@ public extension Stream {
     }
 
     public func filter(predicate: T -> Bool) -> Stream<T> {
-        return self.flatMap { t in
-            if predicate(t) {
-                return Stream.of(t)
+        return self.flatMap { element in
+            if predicate(element) {
+                return Stream.of(element)
             } else {
                 return Stream.empty()
             }
@@ -141,9 +141,9 @@ public extension Stream {
     ) -> Future<Reduced> {
         let reducedLock = Lock(initial)
 
-        return self.forEach { t in
+        return self.forEach { element in
             reducedLock.mutate { reduced in
-                return reducer(reduced, t)
+                return reducer(reduced, element)
             }
         }.flatMap(reducedLock.get)
     }
