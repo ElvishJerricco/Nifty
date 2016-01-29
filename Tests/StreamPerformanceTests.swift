@@ -39,7 +39,7 @@ class StreamPerformanceTests: XCTestCase {
     func testSerialReductionPerformanceForSmallReducer() {
         self.measureBlock {
             print("Testing serial reduction performance for small reducer")
-            let reduction = self.largeRange.stream().reduce(0, reducer: self.smallReducer).wait()
+            let reduction = self.largeRange.stream().reduce(0, combine: self.smallReducer).wait()
             XCTAssert(reduction == 1249975000)
         }
     }
@@ -47,7 +47,7 @@ class StreamPerformanceTests: XCTestCase {
     func testConcurrentReductionPerformanceForSmallReducer() {
         self.measureBlock {
             print("Testing concurrent reduction performance for small reducer")
-            let reduction = self.largeRange.stream().reduce(identity: 0, merger: self.smallReducer, reducer: self.smallReducer).wait()
+            let reduction = self.largeRange.stream().reduce(identity: 0, accumulate: self.smallReducer, combine: self.smallReducer).wait()
             XCTAssert(reduction == 1249975000)
         }
     }
@@ -67,7 +67,7 @@ class StreamPerformanceTests: XCTestCase {
     func testSerialReductionPerformanceForLargeReducer() {
         self.measureBlock {
             print("Testing serial reduction performance for large reducer")
-            let reduction = self.largeRange.stream().reduce(0, reducer: self.largeReducer).wait()
+            let reduction = self.largeRange.stream().reduce(0, combine: self.largeReducer).wait()
             XCTAssert(reduction == 1249975000)
         }
     }
@@ -75,7 +75,7 @@ class StreamPerformanceTests: XCTestCase {
     func testConcurrentReductionPerformanceForLargeReducer() {
         self.measureBlock {
             print("Testing concurrent reduction performance for large reducer")
-            let reduction = self.largeRange.stream().reduce(identity: 0, merger: self.largeReducer, reducer: self.largeReducer).wait()
+            let reduction = self.largeRange.stream().reduce(identity: 0, accumulate: self.largeReducer, combine: self.largeReducer).wait()
             XCTAssert(reduction == 1249975000)
         }
     }

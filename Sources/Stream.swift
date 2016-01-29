@@ -111,8 +111,8 @@ public extension Stream {
 public extension Stream {
     public func reduce<Reduced>(
         identity identity: Reduced,
-        merger: (Reduced, Reduced) -> Reduced,
-        reducer: (Reduced, T) -> Reduced
+        accumulate: (Reduced, Reduced) -> Reduced,
+        combine: (Reduced, T) -> Reduced
     ) -> Future<Reduced> {
         let availableReduced = Lock([Reduced]())
 
@@ -124,24 +124,24 @@ public extension Stream {
                     return identity
                 }
             }.wait()
-            let newReduced = reducer(reduced, element)
+            let newReduced = combine(reduced, element)
             availableReduced.mutate { available in
                 return available + newReduced
             }
         }.flatMap(availableReduced.get).map {
-            return $0.reduce(identity, combine: merger)
+            return $0.reduce(identity, combine: accumulate)
         }
     }
 
     public func reduce<Reduced>(
         initial: Reduced,
-        reducer: (Reduced, T) -> Reduced
+        combine: (Reduced, T) -> Reduced
     ) -> Future<Reduced> {
         let reducedLock = Lock(initial)
 
         return self.forEach { element in
             reducedLock.mutate { reduced in
-                return reducer(reduced, element)
+                return combine(reduced, element)
             }
         }.flatMap(reducedLock.get)
     }
