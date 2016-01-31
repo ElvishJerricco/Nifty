@@ -42,7 +42,7 @@ public struct Channel<T> {
     }
 }
 
-// Functor
+// MARK: Functor
 
 public extension Channel {
     public func map<U>(f: T -> U) -> Channel<U> {
@@ -54,7 +54,7 @@ public func <^><T, U>(f: T -> U, channel: Channel<T>) -> Channel<U> {
     return channel.map(f)
 }
 
-// Applicative
+// MARK: Applicative
 
 public extension Channel {
     public func apply<U>(fn: Channel<T -> U>) -> Channel<U> {
@@ -66,7 +66,7 @@ public func <*><A, B>(f: Channel<A -> B>, a: Channel<A>) -> Channel<B> {
     return a.apply(f)
 }
 
-// Monad
+// MARK: Monad
 
 public extension Channel {
     public static func of<T>(t: T) -> Channel<T> {
@@ -82,7 +82,7 @@ public func >>==<T, U>(channel: Channel<T>, f: T -> Channel<U>) -> Channel<U> {
     return channel.flatMap(f)
 }
 
-// Monoid
+// MARK: Monoid
 
 public extension Channel {
     public static func empty<T>() -> Channel<T> {
@@ -101,7 +101,7 @@ public func +<T>(a: Channel<T>, b: Channel<T>) -> Channel<T> {
     return a.appended(b)
 }
 
-// Run
+// MARK: Run
 
 public extension Channel {
     public func addHandler(handler: T -> ()) {
