@@ -8,23 +8,21 @@
 import DispatchKit
 
 public class ChannelWriter<T> {
-    private var handlers: [T -> ()] = []
+    private var handlersLock = Lock<[T -> ()]>([])
 
     public init() {
     }
 
     public func addHandler(handler: T -> ()) {
-        handlers.append(handler)
+            handlers.append(handler)
+        }
     }
 
     public func write(t: T, queue: DispatchQueue = Dispatch.globalQueue) -> Future<()> {
-        let group = DispatchGroup()
-        Dispatch.globalQueue.async(group) {
-            queue.apply(self.handlers.count) { index in
-                self.handlers[index](t)
+            queue.apply(handlers.count) { index in
+                handlers[index](t)
             }
         }
-        return group.future(queue) { }
     }
 
     public var channel: Channel<T> {
