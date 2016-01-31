@@ -96,7 +96,7 @@ public extension Future {
     }
 
     public func flatMap<U>(f: T -> Future<U>) -> Future<U> {
-        return Future<U>(self.cont.flatMap({$0.cont} * f))
+        return Future<U>(self.cont.flatMap { f($0).cont })
     }
 }
 

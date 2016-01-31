@@ -72,7 +72,7 @@ public extension Channel {
     }
 
     public func flatMap<U>(f: T -> Channel<U>) -> Channel<U> {
-        return Channel<U>(self.cont.flatMap({$0.cont} * f))
+        return Channel<U>(self.cont.flatMap { f($0).cont })
     }
 }
 

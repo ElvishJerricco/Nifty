@@ -156,7 +156,7 @@ public extension Stream {
     /// - returns: A stream whose elements are the elements of all streams returned
     /// by applying the mapper to each element of this stream.
     public func flatMap<U>(mapper: T -> Stream<U>) -> Stream<U> {
-        return Stream<U>(self.cont.flatMap({$0.cont} * mapper))
+        return Stream<U>(self.cont.flatMap { mapper($0).cont })
     }
 }
 
