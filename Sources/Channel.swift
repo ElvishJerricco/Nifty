@@ -99,6 +99,20 @@ public func +<T>(a: Channel<T>, b: Channel<T>) -> Channel<T> {
     return a.appended(b)
 }
 
+// MARK: Util
+
+public extension Channel {
+    public func filter(predicate: T -> Bool) -> Channel<T> {
+        return self.flatMap { value in
+            if predicate(value) {
+                return Channel.of(value)
+            } else {
+                return Channel.empty()
+            }
+        }
+    }
+}
+
 // MARK: Run
 
 public extension Channel {
