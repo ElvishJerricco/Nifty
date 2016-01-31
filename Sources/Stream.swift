@@ -337,7 +337,7 @@ public extension Stream {
     ///
     ///         combine(combine(reduced, a), b) == combine(combine(reduced, b), a)
     ///
-    /// This law is necessary largely because Streams are and unordered.
+    /// This law is necessary largely because Streams are unordered.
     ///
     /// - parameter initial: The value to start reduction with.
     /// - parameter combine: A function for combining an element and a reduction into a new reduction.
