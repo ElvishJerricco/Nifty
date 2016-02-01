@@ -14,7 +14,6 @@
 		7E4720871C4D1FFE0082D597 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4720821C4D1FFE0082D597 /* Future.swift */; };
 		7E4720881C4D1FFE0082D597 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4720831C4D1FFE0082D597 /* Operators.swift */; };
 		7E6BC8931C57C49F0070453E /* Continuation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6BC8921C57C49F0070453E /* Continuation.swift */; };
-		7E6BFDCC1C6000F600AD240F /* DispatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6BFDC91C6000DC00AD240F /* DispatchKit.framework */; };
 		7E94FC581C54A1360098BE69 /* LockTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E94FC571C54A1360098BE69 /* LockTest.swift */; };
 		7EFF2AD31C4B6FAA00E27D74 /* Nifty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EFF2AC81C4B6FAA00E27D74 /* Nifty.framework */; };
 		7EFF2AE01C4B6FB700E27D74 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2AB41C4B6F7200E27D74 /* Stream.swift */; };
@@ -22,34 +21,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7E6BFDC41C6000DC00AD240F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E6BFDBD1C6000DC00AD240F /* DispatchKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2A32780A195DE4D30087C265;
-			remoteInfo = DispatchKit;
-		};
-		7E6BFDC61C6000DC00AD240F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E6BFDBD1C6000DC00AD240F /* DispatchKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2A327815195DE4D30087C265;
-			remoteInfo = DispatchKitTests;
-		};
-		7E6BFDC81C6000DC00AD240F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E6BFDBD1C6000DC00AD240F /* DispatchKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7E8927A21C16397C0099E69A;
-			remoteInfo = "DispatchKit OS X";
-		};
-		7E6BFDCA1C6000DC00AD240F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E6BFDBD1C6000DC00AD240F /* DispatchKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7E8927AB1C16397C0099E69A;
-			remoteInfo = "DispatchKit OS XTests";
-		};
 		7EFF2AD41C4B6FAA00E27D74 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7EFF2A761C4B6F5900E27D74 /* Project object */;
@@ -67,7 +38,6 @@
 		7E4720821C4D1FFE0082D597 /* Future.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
 		7E4720831C4D1FFE0082D597 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		7E6BC8921C57C49F0070453E /* Continuation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Continuation.swift; sourceTree = "<group>"; };
-		7E6BFDBD1C6000DC00AD240F /* DispatchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DispatchKit.xcodeproj; path = "Packages/DispatchKit-2.1.8/DispatchKit.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		7E94FC571C54A1360098BE69 /* LockTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockTest.swift; sourceTree = "<group>"; };
 		7EBBCE241C5508C4008FBE53 /* Example.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Example.playground; sourceTree = "<group>"; };
 		7EFF2A7C1C4B6F7200E27D74 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -84,7 +54,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E6BFDCC1C6000F600AD240F /* DispatchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,17 +68,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7E6BFDBE1C6000DC00AD240F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7E6BFDC51C6000DC00AD240F /* DispatchKit.framework */,
-				7E6BFDC71C6000DC00AD240F /* DispatchKitTests.xctest */,
-				7E6BFDC91C6000DC00AD240F /* DispatchKit.framework */,
-				7E6BFDCB1C6000DC00AD240F /* DispatchKit OS XTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		7EFF2A751C4B6F5900E27D74 = {
 			isa = PBXGroup;
 			children = (
@@ -141,7 +99,6 @@
 		7EFF2AB51C4B6F7200E27D74 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				7E6BFDBD1C6000DC00AD240F /* DispatchKit.xcodeproj */,
 				7EFF2AB61C4B6F7200E27D74 /* StreamPerformanceTests.swift */,
 				7E94FC571C54A1360098BE69 /* LockTest.swift */,
 			);
@@ -250,12 +207,6 @@
 			mainGroup = 7EFF2A751C4B6F5900E27D74;
 			productRefGroup = 7EFF2AC91C4B6FAA00E27D74 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 7E6BFDBE1C6000DC00AD240F /* Products */;
-					ProjectRef = 7E6BFDBD1C6000DC00AD240F /* DispatchKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				7EFF2AC71C4B6FAA00E27D74 /* Nifty */,
@@ -263,37 +214,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		7E6BFDC51C6000DC00AD240F /* DispatchKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = DispatchKit.framework;
-			remoteRef = 7E6BFDC41C6000DC00AD240F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7E6BFDC71C6000DC00AD240F /* DispatchKitTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = DispatchKitTests.xctest;
-			remoteRef = 7E6BFDC61C6000DC00AD240F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7E6BFDC91C6000DC00AD240F /* DispatchKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = DispatchKit.framework;
-			remoteRef = 7E6BFDC81C6000DC00AD240F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7E6BFDCB1C6000DC00AD240F /* DispatchKit OS XTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "DispatchKit OS XTests.xctest";
-			remoteRef = 7E6BFDCA1C6000DC00AD240F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7EFF2AC61C4B6FAA00E27D74 /* Resources */ = {
