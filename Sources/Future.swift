@@ -7,6 +7,8 @@
 
 import DispatchKit
 
+// MARK: Promise
+
 public class Promise<T> {
     private var state: Either<T, [T -> ()]> = .Right([])
     private let completionQueue: DispatchQueue = DispatchQueue("Nifty.Promise.completionQueue") // serial queue
@@ -54,6 +56,8 @@ public class Promise<T> {
     }
 }
 
+// MARK: Future
+
 public struct Future<T> {
     public let cont: Continuation<(), T>
     public init(_ cont: Continuation<(), T>) {
@@ -64,7 +68,7 @@ public struct Future<T> {
     }
 }
 
-// Functor
+// MARK: Functor
 
 public extension Future {
     public func map<U>(f: T -> U) -> Future<U> {
@@ -76,7 +80,7 @@ public func <^><T, U>(f: T -> U, future: Future<T>) -> Future<U> {
     return future.map(f)
 }
 
-// Applicative
+// MARK: Applicative
 
 public extension Future {
     public func apply<U>(futureFunc: Future<T -> U>) -> Future<U> {
@@ -88,7 +92,7 @@ public func <*><A, B>(f: Future<A -> B>, a: Future<A>) -> Future<B> {
     return a.apply(f)
 }
 
-// Monad
+// MARK: Monad
 
 public extension Future {
     public static func of<T>(t: T) -> Future<T> {
@@ -104,7 +108,7 @@ public func >>==<T, U>(future: Future<T>, f: T -> Future<U>) -> Future<U> {
     return future.flatMap(f)
 }
 
-// Run
+// MARK: Run
 
 public extension Future {
     public func onComplete(handler: T -> ()) {
@@ -112,7 +116,7 @@ public extension Future {
     }
 }
 
-// Dispatch Integration
+// MARK: Dispatch Integration
 
 public extension DispatchQueue {
     public func future<T>(f: () -> T) -> Future<T> {
