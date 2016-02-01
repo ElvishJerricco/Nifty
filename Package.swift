@@ -1,6 +1,6 @@
 //
 //  Package.swift
-//  Streams
+//  Nifty
 //
 //  Copyright © 2016 ElvishJerricco. All rights reserved.
 //
