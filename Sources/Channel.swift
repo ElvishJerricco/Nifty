@@ -37,6 +37,7 @@ public class ChannelWriter<T> {
             queue.apply(handlers.count) { index in
                 handlers[index](value)
             }
+            handlers = []
         }
     }
 
@@ -49,6 +50,7 @@ public class ChannelWriter<T> {
 /// A `Channel` is a front end for receiving values written to a `ChannelWriter`.
 /// A `Channel` provides an interface for adding handlers for these values,
 /// as well as ways to create new `Channels` that change values before passing them to handlers.
+/// Each handler is only ever called once; with the next value the channel receives after adding it.
 public struct Channel<T> {
     public let cont: Continuation<(), T>
     public init(_ cont: Continuation<(), T>) {
@@ -172,7 +174,7 @@ public extension Channel {
             if predicate(value) {
                 return Channel.of(value)
             } else {
-                return Channel.empty()
+                return self.filter(predicate)
             }
         }
     }
@@ -181,8 +183,17 @@ public extension Channel {
 // MARK: Run
 
 public extension Channel {
-    /// - parameter handler: A handler to add for receiving values from this channel.
+    /// - parameter handler: Add a handler to receive the next value from this channel
     public func addHandler(handler: T -> ()) {
         self.cont.run(handler)
+    }
+
+    /// - returns: A future representing the next value this channel receives.
+    public func next() -> Future<T> {
+        let promise = Promise<T>()
+        self.addHandler {
+            promise.complete($0)
+        }
+        return promise.future
     }
 }
