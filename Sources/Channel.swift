@@ -25,7 +25,7 @@ public class ChannelWriter<T> {
     }
 
     /// Asynchronously and concurrently writes a value to all attached handlers.
-    /// 
+    ///
     /// - Note: If the queue passed is not concurrent, handlers will not be called concurrently.
     ///
     /// - parameter value: The value to write

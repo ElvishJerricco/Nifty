@@ -12,10 +12,10 @@ import DispatchKit
 public class Promise<T> {
     private var state: Either<T, [T -> ()]> = .Right([])
     private let completionQueue: DispatchQueue = DispatchQueue("Nifty.Promise.completionQueue") // serial queue
-    
+
     public init() {
     }
-    
+
     private func onComplete(handler: T -> ()) {
         completionQueue.async {
             switch self.state {
@@ -28,7 +28,7 @@ public class Promise<T> {
             }
         }
     }
-    
+
     public func complete(t: T, queue: DispatchQueue = Dispatch.globalQueue) {
         completionQueue.async {
             switch self.state {
@@ -50,7 +50,7 @@ public class Promise<T> {
             }
         }
     }
-    
+
     public var future: Future<T> {
         return Future(Continuation(self.onComplete))
     }
@@ -153,18 +153,18 @@ public extension Future {
     public func wait() -> T {
         return wait(.Forever)!
     }
-    
+
     public func wait(time: DispatchTime) -> T? {
         var t: T? = nil
         let semaphore = DispatchSemaphore(0)
-        
+
         onComplete { completed in
             t = completed
             semaphore.signal()
         }
-        
+
         semaphore.wait(time)
-        
+
         return t
     }
 }

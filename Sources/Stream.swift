@@ -20,7 +20,7 @@ import DispatchKit
 /// Streams work asynchronously, so `wait()` is called to wait on the result.
 ///
 /// There are three stages to using streams.
-/// 
+///
 /// - **Create the stream**
 ///
 ///     Most often, a stream will be created using `CollectionType.stream()`, or `Stream.of(T...)`.
@@ -42,12 +42,12 @@ import DispatchKit
 ///     There are several intermediary operations to manipulate the stream.
 ///     The simplest is `Stream<T>.map(T -> U)`.
 ///     This returns a stream that maps elements of the original stream to elements of a different type.
-///     
+///
 ///     Streams are immutable, lazy, and reusable,
 ///     so intermediary operations aren't actually changing the stream or its elements.
 ///     Instead, they construct a new stream that will get its elements from the old stream,
 ///     and modify them accordingly before passing the element to a handler.
-/// 
+///
 /// - **Run the stream**
 ///
 ///     Terminal operations on a stream will start running the stream.
@@ -253,7 +253,7 @@ public extension Stream {
 
 public extension Stream {
     /// Asynchronously and concurrently reduces elements of this stream to a single value.
-    /// 
+    ///
     ///     let futureSum = arrayOfStrings.stream()
     ///         .reduce(identity: 0, accumulate: +) { i, s in
     ///             return i + s.characters.count
