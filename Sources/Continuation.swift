@@ -47,7 +47,9 @@ public extension Continuation {
     }
 }
 
-public func callcc<R, A, B>(f: (A -> Continuation<R, B>) -> Continuation<R, A>) -> Continuation<R, A> {
+public func callcc<R, A, B>(
+    f: (A -> Continuation<R, B>
+) -> Continuation<R, A>) -> Continuation<R, A> {
     return Continuation { k in
         return f { a in
             return Continuation { _ in k(a) }

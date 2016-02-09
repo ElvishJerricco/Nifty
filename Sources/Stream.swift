@@ -7,7 +7,8 @@
 
 import DispatchKit
 
-/// A lazy, asynchronous, concurrent, and reusable stream of operations on elements of data.
+/// A lazy, asynchronous, concurrent, and
+/// reusable stream of operations on elements of data.
 ///
 ///     let sum = (1..<50000).stream()
 ///         .filter { $0 % 2 == 0 }
@@ -16,22 +17,26 @@ import DispatchKit
 ///
 /// This example makes a stream from the collection created by `(1..<50000)`.
 /// Then it filters out from that stream all elements that aren't even.
-/// Then it reduces the stream; it starts at 0, then uses + to combine all elements.
+/// Then it reduces the stream;
+/// it starts at 0, then uses + to combine all elements.
 /// Streams work asynchronously, so `wait()` is called to wait on the result.
 ///
 /// There are three stages to using streams.
 ///
 /// - **Create the stream**
 ///
-///     Most often, a stream will be created using `CollectionType.stream()`, or `Stream.of(T...)`.
+///     Most often, a stream will be created using `CollectionType.stream()`,
+///     or `Stream.of(T...)`.
 ///     But it is possible to create custom streams.
 ///
 ///     A stream uses the `Continuation` monad to pass elements to handlers.
-///     The continuation is specialized to the type `Continuation<Future<()>, T>`.
+///     A continuation is specialized to the type `Continuation<Future<()>, T>`.
 ///     It returns a `Future<()>` because the handlers are asynchronous.
-///     The goal is to create a continuation that will call the handler once for each element.
+///     The goal is to create a continuation that will
+///     call the handler once for each element.
 ///     This is encouraged to be concurrent.
-///     A stream shouldn't complete its future until all the futures returned by the handler are completed.
+///     A stream shouldn't complete its future until
+///     all the futures returned by the handler are completed.
 ///
 ///     The future's type is `Future<()>` because it is isomorphic to `()`.
 ///     That is to say there is no actual return value.
@@ -41,11 +46,13 @@ import DispatchKit
 ///
 ///     There are several intermediary operations to manipulate the stream.
 ///     The simplest is `Stream<T>.map(T -> U)`.
-///     This returns a stream that maps elements of the original stream to elements of a different type.
+///     This returns a stream that maps elements of
+///     the original stream to elements of a different type.
 ///
 ///     Streams are immutable, lazy, and reusable,
-///     so intermediary operations aren't actually changing the stream or its elements.
-///     Instead, they construct a new stream that will get its elements from the old stream,
+///     so intermediary operations aren't changing the stream or its elements.
+///     Instead, they construct a new stream that will
+///     get its elements from the old stream,
 ///     and modify them accordingly before passing the element to a handler.
 ///
 /// - **Run the stream**
@@ -53,22 +60,28 @@ import DispatchKit
 ///     Terminal operations on a stream will start running the stream.
 ///     Most often, the stream will run asynchronously and concurrently,
 ///     but this depends on the how the stream was created.
-///     "Running" a stream means to start accepting elements of the stream with a handler.
-///     The simplest example of this is `Stream.forEach`, which calls a handler for each element.
+///     "Running" a stream means to start accepting
+///     elements of the stream with a handler.
+///     The simplest example of this is `Stream.forEach`,
+///     which calls a handler for each element.
 ///
-///     Most streams are concurrent. This leads to dramatic performance improvements in many scenarios.
-///     There are, however, situations where the overhead of concurrency outweights the performance gains.
+///     Most streams are concurrent.
+///     This leads to dramatic performance improvements in many scenarios.
+///     There are, however, situations where the overhead of
+///     concurrency outweights the performance gains.
 ///     For example, there are two different methods of reducing a stream.
 ///     One is psuedo-serial, in that the reduction is performed serially,
 ///     while the elements are computed concurrently.
-///     The other is fully concurrent, where both the computation of elements and the reduction are concurrent.
-///     For very fast reduction functions, the psuedo-serial method is usually faster,
+///     The other is fully concurrent, where both the computation of
+///     elements and the reduction are concurrent.
+///     For very fast reduction functions,
+///     the psuedo-serial method is usually faster,
 ///     since there's no concurrency overhead.
 ///     For slower reduction functions, the concurrent method is usually faster,
 ///     since more reductions can be occurring at a time.
 ///
 /// Streams and collections differ in several ways.
-/// Besides being concurrent and asynchronous, streams are also lazy and unordered.
+/// Besides being concurrent and asynchronous, streams are lazy and unordered.
 /// Streams do not store elements, and instead rely on abstract data sources.
 /// They can't have their count calculated.
 /// Most importantly, `Stream` is not a data structure.
@@ -99,7 +112,8 @@ public extension Stream {
     ///
     /// - parameter mapper: The function to apply to elements of this stream.
     ///
-    /// - returns: A stream whose elements are the results of applying the mapper to the elements of this stream.
+    /// - returns: A stream whose elements are the results of
+    /// applying the mapper to the elements of this stream.
     public func map<U>(mapper: T -> U) -> Stream<U> {
         return Stream<U>(self.cont.map(mapper))
     }
@@ -119,10 +133,11 @@ public extension Stream {
     ///
     /// Applies the functions in another stream to elements of this stream.
     ///
-    /// - parameter mappers: The stream of functions to apply to elements of this stream.
+    /// - parameter mappers: The stream of functions to
+    /// apply to elements of this stream.
     ///
-    /// - returns: A stream whose elements are the results of applying all functions
-    /// in another stream to all elements of this stream.
+    /// - returns: A stream whose elements are the results of applying all
+    /// functions in another stream to all elements of this stream.
     public func apply<U>(mappers: Stream<T -> U>) -> Stream<U> {
         return Stream<U>(self.cont.apply(mappers.cont))
     }
@@ -149,12 +164,12 @@ public extension Stream {
 
     /// Monad bind.
     ///
-    /// Maps each element of this stream to a stream, and concatenates the results.
+    /// Maps elements of this stream to streams, and concatenates the results.
     ///
     /// - parameter mapper: The function to map elements with.
     ///
-    /// - returns: A stream whose elements are the elements of all streams returned
-    /// by applying the mapper to each element of this stream.
+    /// - returns: A stream whose elements are the elements of all streams
+    /// returned by applying the mapper to each element of this stream.
     public func flatMap<U>(mapper: T -> Stream<U>) -> Stream<U> {
         return Stream<U>(self.cont.flatMap { mapper($0).cont })
     }
@@ -176,7 +191,8 @@ public extension Stream {
     ///
     /// - parameter streams: The streams to join.
     ///
-    /// - returns: A stream whose elements are all the elements of the streams in the parameter.
+    /// - returns: A stream whose elements are all the elements of
+    /// the streams in the parameter.
     public static func join<T>(streams: Stream<Stream<T>>) -> Stream<T> {
         return streams.flatMap { $0 }
     }
@@ -194,7 +210,8 @@ public extension Stream {
 
     /// Monoid mappend
     ///
-    /// - returns: A stream whose elements are all the elements of both this, and another stream.
+    /// - returns: A stream whose elements are all the elements of
+    /// both this, and another stream.
     public func appended(other: Stream<T>) -> Stream<T> {
         return Stream.concat(self, other)
     }
@@ -221,13 +238,14 @@ public extension Stream {
     }
 
     /// Runs the stream on a given handler.
-    /// The handler is expected to be synchronous,
-    /// so the returned `Future<()>` represents the time that all calls to the handler have exited.
+    /// The handler is expected to be synchronous, so the returned `Future<()>`
+    /// represents the time that all calls to the handler have exited.
     /// You can use `Stream.cont.run()` to control the time the future completes
     ///
     /// - parameter handler: The closure to call with each element.
     ///
-    /// - returns: A future representing when all the calls to the handler have exited.
+    /// - returns: A future representing when all the calls to
+    /// the handler have exited.
     public func forEach(handler: T -> ()) -> Future<()> {
         return self.cont.run {
             handler($0)
@@ -237,7 +255,8 @@ public extension Stream {
 
     /// - parameter predicate: A test for elements of this stream.
     ///
-    /// - returns: A new stream whose elements are the elements of this stream that passed the predicate test.
+    /// - returns: A new stream whose elements are the elements of
+    /// this stream that passed the predicate test.
     public func filter(predicate: T -> Bool) -> Stream<T> {
         return self.flatMap { element in
             if predicate(element) {
@@ -252,7 +271,8 @@ public extension Stream {
 // MARK: Reduce
 
 public extension Stream {
-    /// Asynchronously and concurrently reduces elements of this stream to a single value.
+    /// Asynchronously and concurrently reduces elements of
+    /// this stream to a single value.
     ///
     ///     let futureSum = arrayOfStrings.stream()
     ///         .reduce(identity: 0, accumulate: +) { i, s in
@@ -273,25 +293,34 @@ public extension Stream {
     /// - **Commutative:**
     ///
     ///         accumulate(a, b) == accumulate(b, a)
-    ///         combine(combine(reduced, a), b) == combine(combine(reduced, b), a)
+    ///         combine(combine(reduced, a), b) ==
+    ///                                          combine(combine(reduced, b), a)
     /// - **Associative:**
     ///
-    ///         combine(accumulate(a, b), element) == accumulate(a, combine(b, element))
-    ///         accumulate(accumulate(a, b), c) == accumulate(a, accumulate(b, c))
+    ///         combine(accumulate(a, b), element) ==
+    ///                                       accumulate(a, combine(b, element))
+    ///         accumulate(accumulate(a, b), c) ==
+    ///                                          accumulate(a, accumulate(b, c))
     ///
-    /// These laws are necessary largely because Streams are concurrent and unordered.
+    /// These laws are necessary largely because Streams are
+    /// concurrent and unordered.
     ///
-    /// `accumulate` is necessary because several reductions may be occurring at a time,
+    /// `accumulate` is necessary because
+    /// several reductions may be occurring at a time,
     /// which requires their reductions to be accumulated somehow.
     ///
-    /// The initial value is expected to be an identity so that it can start more than one reduction.
-    /// If it weren't an identity, the final accumulation of reducitons would produce unexpected results.
+    /// The initial value is expected to be an identity so
+    /// that it can start more than one reduction.
+    /// If it weren't an identity, the final accumulation of
+    /// reducitons would produce unexpected results.
     ///
-    /// - Note: If the underlying stream is not concurrent, this does not perform concurrently.
+    /// - Note: If the underlying stream is not concurrent,
+    /// this does not perform concurrently.
     ///
     /// - parameter identity: A value that will have no effect when accumulated.
     /// - parameter accumulate: A function for combining two reduced values.
-    /// - parameter combine: A function for combining an element and a reduction into a new reduction.
+    /// - parameter combine: A function for combining an element and
+    /// a reduction into a new reduction.
     ///
     /// - returns: A future that will complete with the result of the reduction.
     public func reduce<Reduced>(
@@ -302,7 +331,8 @@ public extension Stream {
         let availableReduced = Lock([Reduced]())
 
         return self.forEach { element in
-            let reduced: Reduced = availableReduced.acquire { (inout available: [Reduced]) in
+            let reduced: Reduced = availableReduced.acquire {
+            (inout available: [Reduced]) in
                 if available.count > 0 {
                     return available.removeLast()
                 } else {
@@ -335,12 +365,14 @@ public extension Stream {
     ///
     /// - **Commutative:**
     ///
-    ///         combine(combine(reduced, a), b) == combine(combine(reduced, b), a)
+    ///         combine(combine(reduced, a), b) ==
+    ///                                          combine(combine(reduced, b), a)
     ///
     /// This law is necessary largely because Streams are unordered.
     ///
     /// - parameter initial: The value to start reduction with.
-    /// - parameter combine: A function for combining an element and a reduction into a new reduction.
+    /// - parameter combine: A function for combining an element and
+    /// a reduction into a new reduction.
     ///
     /// - returns: A future that will complete with the result of the reduction.
     public func reduce<Reduced>(
@@ -363,14 +395,17 @@ public extension CollectionType where Self.Index.Distance == Int {
     /// - parameter queue: A dispatch queue to call stream handlers on.
     /// If this is concurrent, the stream will be concurrent.
     ///
-    /// - returns: a `Stream` whose elements are the elements of this collection.
-    public func stream(queue: DispatchQueue = Dispatch.globalQueue) -> Stream<Self.Generator.Element> {
+    /// - returns: a `Stream` whose elements are the elements of this collection
+    public func stream(
+        queue: DispatchQueue = Dispatch.globalQueue
+    ) -> Stream<Self.Generator.Element> {
         return Stream { handler in
             let group = DispatchGroup()
             Dispatch.globalQueue.async(group) {
                 let semaphore = DispatchSemaphore(0)
                 queue.apply(self.count) { index in
-                    handler(self[self.startIndex.advancedBy(index)]).onComplete { semaphore.signal() }
+                    handler(self[self.startIndex.advancedBy(index)])
+                        .onComplete { semaphore.signal() }
                 }
                 // Wait for every single iteration to signal.
                 for _ in 0..<self.count {
@@ -385,7 +420,8 @@ public extension CollectionType where Self.Index.Distance == Int {
 // MARK: Optionals
 
 public extension Optional {
-    /// - returns: A stream containing the wrapped value if present, or else an empty stream.
+    /// - returns: A stream containing the wrapped value if present,
+    /// or else an empty stream.
     public func stream() -> Stream<Wrapped> {
         return self.map(Stream<Wrapped>.of) ?? Stream<Wrapped>.empty()
     }

@@ -35,7 +35,9 @@ public extension Either {
     }
 }
 
-public func <*><L, A, B>(f: Either<L, A -> B>, a: Either<L, A>) -> Either<L, B> {
+public func <*><L, A, B>(
+    f: Either<L, A -> B>, a: Either<L, A>
+) -> Either<L, B> {
     return a.apply(f)
 }
 
@@ -56,7 +58,10 @@ public extension Either {
     }
 }
 
-public func >>==<L, R, U>(either: Either<L, R>, f: R -> Either<L, U>) -> Either<L, U> {
+public func >>==<L, R, U>(
+    either: Either<L, R>,
+    f: R -> Either<L, U>
+) -> Either<L, U> {
     return either.flatMap(f)
 }
 

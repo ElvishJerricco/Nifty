@@ -8,7 +8,7 @@
 import DispatchKit
 
 /// The ChannelWriter class writes values to a channel.
-/// It is a reference type so that `Channel`s have a common object to add handlers to.
+/// It's a reference type so `Channel`s have a common object to add handlers to.
 public class ChannelWriter<T> {
     /// A threadsafe array of handlers attached to this writer.
     private var handlersLock = Lock<[T -> ()]>([])
@@ -17,7 +17,7 @@ public class ChannelWriter<T> {
     public init() {
     }
 
-    /// - parameter handler: A function to be called when a value is written to this.
+    /// - parameter handler: A function to be called when a value is written.
     public func addHandler(handler: T -> ()) {
         self.handlersLock.acquire { (inout handlers: [T -> ()]) in
             handlers.append(handler)
@@ -26,13 +26,16 @@ public class ChannelWriter<T> {
 
     /// Asynchronously and concurrently writes a value to all attached handlers.
     ///
-    /// - Note: If the queue passed is not concurrent, handlers will not be called concurrently.
+    /// - Note: If the queue passed is not concurrent,
+    /// handlers will not be called concurrently.
     ///
     /// - parameter value: The value to write
     /// - parameter queue: The queue to execute handlers on
     ///
     /// - returns: A `Future` that will complete when all handlers have exited.
-    public func write(value: T, queue: DispatchQueue = Dispatch.globalQueue) -> Future<()> {
+    public func write(
+        value: T, queue: DispatchQueue = Dispatch.globalQueue
+    ) -> Future<()> {
         return self.handlersLock.acquire { (inout handlers: [T -> ()]) in
             queue.apply(handlers.count) { index in
                 handlers[index](value)
@@ -47,10 +50,12 @@ public class ChannelWriter<T> {
     }
 }
 
-/// A `Channel` is a front end for receiving values written to a `ChannelWriter`.
+/// A `Channel` is a frontend for receiving values written to a `ChannelWriter`.
 /// A `Channel` provides an interface for adding handlers for these values,
-/// as well as ways to create new `Channels` that change values before passing them to handlers.
-/// Each handler is only ever called once; with the next value the channel receives after adding it.
+/// as well as ways to create new `Channels` that
+/// change values before passing them to handlers.
+/// Each handler is only ever called once;
+/// with the next value the channel receives after adding it.
 public struct Channel<T> {
     public let cont: Continuation<(), T>
     public init(_ cont: Continuation<(), T>) {
@@ -68,9 +73,9 @@ public extension Channel {
     ///
     /// Maps this channel to a channel of another type.
     ///
-    /// - parameter mapper: The function to apply to values passed to this channel.
+    /// - parameter mapper: The function to map values of this channel with.
     ///
-    /// - returns: A channel that receives values from this channel after transforming them with the mapper.
+    /// - returns: A channel that receives mapped values from this channel.
     public func map<U>(mapper: T -> U) -> Channel<U> {
         return Channel<U>(self.cont.map(mapper))
     }
@@ -88,11 +93,15 @@ public func <^><T, U>(f: T -> U, channel: Channel<T>) -> Channel<U> {
 public extension Channel {
     /// Applicative <*>
     ///
-    /// Applies the functions in another channel to values passed to this channel.
+    /// Applies functions in another channel to values passed to this channel.
+    /// After `mappers` passes a function,
+    /// the next value passed to self is passed to that function.
+    /// The resulting value is passed to the returned channel.
     ///
-    /// - parameter mappers: The channel of functions to apply to values passed to this channel.
+    /// - parameter mappers: The channel of functions to map with.
     ///
-    /// - returns: A channel that receives values that have been passed through functions received from the `mappers` channel.
+    /// - returns: A channel that receives values that
+    /// have been passed through functions received from the `mappers` channel.
     public func apply<U>(mappers: Channel<T -> U>) -> Channel<U> {
         return Channel<U>(self.cont.apply(mappers.cont))
     }
@@ -124,7 +133,8 @@ public extension Channel {
     ///
     /// - parameter mapper: The function to map values with.
     ///
-    /// - returns: A channel that will receive all values of the channels that the mapper returns.
+    /// - returns: A channel that will receive all values of
+    /// the channels that the mapper returns.
     public func flatMap<U>(mapper: T -> Channel<U>) -> Channel<U> {
         return Channel<U>(self.cont.flatMap { mapper($0).cont })
     }
@@ -147,7 +157,8 @@ public extension Channel {
 
     /// - parameter other: A channel to append with this one.
     ///
-    /// - returns: A channel that receives all values that either this channel or the `other` channel receives.
+    /// - returns: A channel that receives all values that
+    /// either this channel or the `other` channel receives.
     public func appended(other: Channel<T>) -> Channel<T> {
         return Channel<T> { handler in
             self.addHandler(handler)
@@ -183,7 +194,7 @@ public extension Channel {
 // MARK: Run
 
 public extension Channel {
-    /// - parameter handler: Add a handler to receive the next value from this channel
+    /// - parameter handler: Receives the next value this channel receives.
     public func addHandler(handler: T -> ()) {
         self.cont.run(handler)
     }

@@ -23,7 +23,9 @@ public func curry<A, B, C, D>(fn: (A, B, C) -> D) -> A -> B -> C -> D {
     }
 }
 
-public func curry<A, B, C, D, E>(fn: (A, B, C, D) -> E) -> A -> B -> C -> D -> E {
+public func curry<A, B, C, D, E>(
+    fn: (A, B, C, D) -> E
+) -> A -> B -> C -> D -> E {
     return { a in
         { b in
             { c in
@@ -35,7 +37,9 @@ public func curry<A, B, C, D, E>(fn: (A, B, C, D) -> E) -> A -> B -> C -> D -> E
     }
 }
 
-public func curry<A, B, C, D, E, F>(fn: (A, B, C, D, E) -> F) -> A -> B -> C -> D -> E -> F {
+public func curry<A, B, C, D, E, F>(
+    fn: (A, B, C, D, E) -> F
+) -> A -> B -> C -> D -> E -> F {
     return { a in
         { b in
             { c in
@@ -49,7 +53,9 @@ public func curry<A, B, C, D, E, F>(fn: (A, B, C, D, E) -> F) -> A -> B -> C -> 
     }
 }
 
-public func curry<A, B, C, D, E, F, G>(fn: (A, B, C, D, E, F) -> G) -> A -> B -> C -> D -> E -> F -> G {
+public func curry<A, B, C, D, E, F, G>(
+    fn: (A, B, C, D, E, F) -> G
+) -> A -> B -> C -> D -> E -> F -> G {
     return { a in
         { b in
             { c in
@@ -65,7 +71,9 @@ public func curry<A, B, C, D, E, F, G>(fn: (A, B, C, D, E, F) -> G) -> A -> B ->
     }
 }
 
-public func curry<A, B, C, D, E, F, G, H>(fn: (A, B, C, D, E, F, G) -> H) -> A -> B -> C -> D -> E -> F -> G -> H {
+public func curry<A, B, C, D, E, F, G, H>(
+    fn: (A, B, C, D, E, F, G) -> H
+) -> A -> B -> C -> D -> E -> F -> G -> H {
     return { a in
         { b in
             { c in
@@ -83,7 +91,9 @@ public func curry<A, B, C, D, E, F, G, H>(fn: (A, B, C, D, E, F, G) -> H) -> A -
     }
 }
 
-public func curry<A, B, C, D, E, F, G, H, I>(fn: (A, B, C, D, E, F, G, H) -> I) -> A -> B -> C -> D -> E -> F -> G -> H -> I {
+public func curry<A, B, C, D, E, F, G, H, I>(
+    fn: (A, B, C, D, E, F, G, H) -> I
+) -> A -> B -> C -> D -> E -> F -> G -> H -> I {
     return { a in
         { b in
             { c in

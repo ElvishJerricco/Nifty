@@ -11,7 +11,8 @@ import DispatchKit
 
 public class Promise<T> {
     private var state: Either<T, [T -> ()]> = .Right([])
-    private let completionQueue: DispatchQueue = DispatchQueue("Nifty.Promise.completionQueue") // serial queue
+    private let completionQueue: DispatchQueue =
+        DispatchQueue("Nifty.Promise.completionQueue") // serial queue
 
     public init() {
     }
@@ -38,13 +39,18 @@ public class Promise<T> {
                 self.state = .Left(t)
                 // queue.apply is blocking
                 queue.apply(handlers.count) { index in
-                    // Note: There is a potential deadlock here at queue.apply when queue targets completionQueue.
-                    // This is because completionQueue is serial, so queue can't have blocks running at this time.
-                    // The same deadlock would be caused when completionQueue targets queue if queue is serial.
+                    // Note: There is a potential deadlock here at queue.apply
+                    // when queue targets completionQueue.
+                    // This is because completionQueue is serial, so queue can't
+                    // have blocks running at this time.
+                    // The same deadlock would be caused when completionQueue
+                    // targets queue if queue is serial.
                     // However, this deadlock IS NOT possible.
-                    // CompletionQueue is never handed out to become targeted, nor is its target set.
+                    // CompletionQueue is never handed out to become targeted,
+                    // nor is its target set.
                     // It does have an implicit target of some global queue.
-                    // But global queues are always concurrent, so they won't cause this deadlock.
+                    // But global queues are always concurrent, so they won't
+                    // cause this deadlock.
                     handlers[index](t)
                 }
             }
@@ -122,7 +128,7 @@ public extension DispatchQueue {
     public func future<T>(f: () -> T) -> Future<T> {
         let promise = Promise<T>()
         self.async {
-            // promise.complete is non-blocking. No deadlock for using self inside a dispatch on self when self is serial
+            // promise.complete is non-blocking. No deadlock.
             promise.complete(f(), queue: self)
         }
         return promise.future
@@ -131,7 +137,7 @@ public extension DispatchQueue {
     public func barrierFuture<T>(f: () -> T) -> Future<T> {
         let promise = Promise<T>()
         self.barrierAsync {
-            // promise.complete is non-blocking. No deadlock for using self inside a dispatch on self when self is serial
+            // promise.complete is non-blocking. No deadlock.
             promise.complete(f(), queue: self)
         }
         return promise.future
@@ -142,7 +148,7 @@ public extension DispatchGroup {
     public func future<T>(queue: DispatchQueue, f: () -> T) -> Future<T> {
         let promise = Promise<T>()
         self.notify(queue) {
-            // promise.complete is non-blocking. No deadlock for using queue inside a dispatch on queue when queue is serial
+            // promise.complete is non-blocking. No deadlock.
             promise.complete(f(), queue: queue)
         }
         return promise.future
