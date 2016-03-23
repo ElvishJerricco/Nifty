@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Stream Struct Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/Stream" class="dashAnchor"></a>
+    <a title="Stream Struct Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (64% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Stream Struct Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/ChannelWriter.html">ChannelWriter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Lock.html">Lock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Promise.html">Promise</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/Either.html">Either</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/CollectionType.html">CollectionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/DispatchQueue.html">DispatchQueue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Optional.html">Optional</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions/*(_:_:).html">*(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/+(_:_:).html">+(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/+(_:_:).html">+(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/+(_:_:).html">+(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/+(_:_:).html">+(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&lt;*&gt;(_:_:).html">&lt;*&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&lt;*&gt;(_:_:).html">&lt;*&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF5Niftyoi3lmgu1_rFTGOS_6EitherxFq_q0__GS0_xq___GS0_xq0__">&lt;*&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&lt;*&gt;(_:_:).html">&lt;*&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&lt;*&gt;(_:_:).html">&lt;*&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&lt;^&gt;(_:_:).html">&lt;^&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&lt;^&gt;(_:_:).html">&lt;^&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF5Niftyoi3lxgu1_rFTFq_q0_GOS_6Eitherxq___GS0_xq0__">&lt;^&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&lt;^&gt;(_:_:).html">&lt;^&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&lt;^&gt;(_:_:).html">&lt;^&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&gt;&gt;==(_:_:).html">&gt;&gt;==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&gt;&gt;==(_:_:).html">&gt;&gt;==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&gt;&gt;==(_:_:).html">&gt;&gt;==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&gt;&gt;==(_:_:).html">&gt;&gt;==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF5Niftyoi4ggeeu1_rFTGOS_6Eitherxq__Fq_GS0_xq0___GS0_xq0__">&gt;&gt;==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty6callccu1_rFFFq_GVS_12Continuationxq0__GS0_xq__GS0_xq__">callcc(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty5curryu7_rFFTxq_q0_q1_q2_q3_q4_q5__q6_FxFq_Fq0_Fq1_Fq2_Fq3_Fq4_Fq5_q6_">curry(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty5curryu5_rFFTxq_q0_q1_q2_q3__q4_FxFq_Fq0_Fq1_Fq2_Fq3_q4_">curry(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty5curryu6_rFFTxq_q0_q1_q2_q3_q4__q5_FxFq_Fq0_Fq1_Fq2_Fq3_Fq4_q5_">curry(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty5curryu4_rFFTxq_q0_q1_q2__q3_FxFq_Fq0_Fq1_Fq2_q3_">curry(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty5curryu1_rFFTxq__q0_FxFq_q0_">curry(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty5curryu3_rFFTxq_q0_q1__q2_FxFq_Fq0_Fq1_q2_">curry(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty5curryu2_rFFTxq_q0__q1_FxFq_Fq0_q1_">curry(_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Channel.html">Channel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Continuation.html">Continuation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Future.html">Future</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Stream.html">Stream</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Stream</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                </div>
+              </div>
+            <p>A lazy, asynchronous, concurrent, and
+reusable stream of operations on elements of data.</p>
+
+<pre class="highlight plaintext"><code>let sum = (1..&lt;50000).stream()
+    .filter { $0 % 2 == 0 }
+    .reduce(0, reducer: +)
+    .wait()
+</code></pre>
+
+<p>This example makes a stream from the collection created by <code>(1..&lt;50000)</code>.
+Then it filters out from that stream all elements that aren&rsquo;t even.
+Then it reduces the stream;
+it starts at 0, then uses + to combine all elements.
+Streams work asynchronously, so <code>wait()</code> is called to wait on the result.</p>
+
+<p>There are three stages to using streams.</p>
+
+<ul>
+<li><p><strong>Create the stream</strong></p>
+
+<p>Most often, a stream will be created using <code>CollectionType.stream()</code>,
+or <code>Stream.of(T...)</code>.
+But it is possible to create custom streams.</p>
+
+<p>A stream uses the <code><a href="../Structs/Continuation.html">Continuation</a></code> monad to pass elements to handlers.
+A continuation is specialized to the type <code>Continuation&lt;Future&lt;()&gt;, T&gt;</code>.
+It returns a <code><a href="../Structs/Future.html">Future&lt;()&gt;</a></code> because the handlers are asynchronous.
+The goal is to create a continuation that will
+call the handler once for each element.
+This is encouraged to be concurrent.
+A stream shouldn&rsquo;t complete its future until
+all the futures returned by the handler are completed.</p>
+
+<p>The future&rsquo;s type is <code><a href="../Structs/Future.html">Future&lt;()&gt;</a></code> because it is isomorphic to <code>()</code>.
+That is to say there is no actual return value.
+The only thing that matters is the time of completion.</p></li>
+<li><p><strong>Manipulate the stream</strong></p>
+
+<p>There are several intermediary operations to manipulate the stream.
+The simplest is <code>Stream&lt;T&gt;.map(T -&gt; U)</code>.
+This returns a stream that maps elements of
+the original stream to elements of a different type.</p>
+
+<p>Streams are immutable, lazy, and reusable,
+so intermediary operations aren&rsquo;t changing the stream or its elements.
+Instead, they construct a new stream that will
+get its elements from the old stream,
+and modify them accordingly before passing the element to a handler.</p></li>
+<li><p><strong>Run the stream</strong></p>
+
+<p>Terminal operations on a stream will start running the stream.
+Most often, the stream will run asynchronously and concurrently,
+but this depends on the how the stream was created.
+<q>Running</q> a stream means to start accepting
+elements of the stream with a handler.
+The simplest example of this is <code>Stream.forEach</code>,
+which calls a handler for each element.</p>
+
+<p>Most streams are concurrent.
+This leads to dramatic performance improvements in many scenarios.
+There are, however, situations where the overhead of
+concurrency outweights the performance gains.
+For example, there are two different methods of reducing a stream.
+One is psuedo-serial, in that the reduction is performed serially,
+while the elements are computed concurrently.
+The other is fully concurrent, where both the computation of
+elements and the reduction are concurrent.
+For very fast reduction functions,
+the psuedo-serial method is usually faster,
+since there&rsquo;s no concurrency overhead.
+For slower reduction functions, the concurrent method is usually faster,
+since more reductions can be occurring at a time.</p></li>
+</ul>
+
+<p>Streams and collections differ in several ways.
+Besides being concurrent and asynchronous, streams are lazy and unordered.
+Streams do not store elements, and instead rely on abstract data sources.
+They can&rsquo;t have their count calculated.
+Most importantly, <code>Stream</code> is not a data structure.
+It is a pipeline for manipulating elements, no matter how many there are.
+This is the inspiration for using the <code><a href="../Structs/Continuation.html">Continuation</a></code> monad.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vV5Nifty6Stream4contGVS_12ContinuationGVS_6FutureT__x_"></a>
+                    <a name="//apple_ref/swift/Property/cont" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vV5Nifty6Stream4contGVS_12ContinuationGVS_6FutureT__x_">cont</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The continuation that defines this <code><a href="../Structs/Stream.html">Stream</a></code>.
+<code>cont.run</code> is the function to call to run the stream on some handler.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">cont</span><span class="p">:</span> <span class="kt">Continuation</span><span class="o">&lt;</span><span class="kt">Future</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV5Nifty6StreamcFGVS_12ContinuationGVS_6FutureT__x_GS0_x_"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV5Nifty6StreamcFGVS_12ContinuationGVS_6FutureT__x_GS0_x_">init(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes the stream with a continuation.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">cont</span><span class="p">:</span> <span class="kt">Continuation</span><span class="o">&lt;</span><span class="kt">Future</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV5Nifty6StreamcFFFxGVS_6FutureT__GS1_T__GS0_x_"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV5Nifty6StreamcFFFxGVS_6FutureT__GS1_T__GS0_x_">init(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes the stream with an unwrapped continuation.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">cont</span><span class="p">:</span> <span class="p">(</span><span class="kt">T</span> <span class="o">-&gt;</span> <span class="kt">Future</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Future</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV5Nifty6Stream3mapurFFxqd__GS0_qd___"></a>
+                    <a name="//apple_ref/swift/Method/map(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV5Nifty6Stream3mapurFFxqd__GS0_qd___">map(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Functor fmap.</p>
+
+<p>Maps this stream to a stream of another type.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">U</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">mapper</span><span class="p">:</span> <span class="kt">T</span> <span class="o">-&gt;</span> <span class="kt">U</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">U</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mapper</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The function to apply to elements of this stream.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A stream whose elements are the results of applying the mapper to the elements of this stream.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV5Nifty6Stream5applyurFGS0_Fxqd___GS0_qd___"></a>
+                    <a name="//apple_ref/swift/Method/apply(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV5Nifty6Stream5applyurFGS0_Fxqd___GS0_qd___">apply(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Applicative &lt;*&gt;</p>
+
+<p>Applies the functions in another stream to elements of this stream.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">apply</span><span class="o">&lt;</span><span class="kt">U</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">mappers</span><span class="p">:</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">T</span> <span class="o">-&gt;</span> <span class="kt">U</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">U</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mappers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The stream of functions to apply to elements of this stream.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A stream whose elements are the results of applying all functions in another stream to all elements of this stream.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFV5Nifty6Stream2ofurFqd__GS0_qd___"></a>
+                    <a name="//apple_ref/swift/Method/of(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFV5Nifty6Stream2ofurFqd__GS0_qd___">of(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Monad return.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">of</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">element</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>element</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The element to make a stream around.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A stream with one element.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV5Nifty6Stream7flatMapurFFxGS0_qd___GS0_qd___"></a>
+                    <a name="//apple_ref/swift/Method/flatMap(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV5Nifty6Stream7flatMapurFFxGS0_qd___GS0_qd___">flatMap(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Monad bind.</p>
+
+<p>Maps elements of this stream to streams, and concatenates the results.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">flatMap</span><span class="o">&lt;</span><span class="kt">U</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">mapper</span><span class="p">:</span> <span class="kt">T</span> <span class="o">-&gt;</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">U</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">U</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mapper</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The function to map elements with.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A stream whose elements are the elements of all streams returned by applying the mapper to each element of this stream.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFV5Nifty6Stream4joinurFGS0_GS0_qd____GS0_qd___"></a>
+                    <a name="//apple_ref/swift/Method/join(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFV5Nifty6Stream4joinurFGS0_GS0_qd____GS0_qd___">join(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Monad join</p>
+
+<p>The join function is the conventional monad join operator.
+It is used to remove one level of monadic structure,
+projecting its bound argument into the outer level.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">join</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">streams</span><span class="p">:</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>streams</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The streams to join.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A stream whose elements are all the elements of the streams in the parameter.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFV5Nifty6Stream5emptyurFT_GS0_qd___"></a>
+                    <a name="//apple_ref/swift/Method/empty()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFV5Nifty6Stream5emptyurFT_GS0_qd___">empty()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Monoid mempty</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">empty</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An empty stream of any type.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV5Nifty6Stream8appendedFGS0_x_GS0_x_"></a>
+                    <a name="//apple_ref/swift/Method/appended(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV5Nifty6Stream8appendedFGS0_x_GS0_x_">appended(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Monoid mappend</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">appended</span><span class="p">(</span><span class="nv">other</span><span class="p">:</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A stream whose elements are all the elements of both this, and another stream.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFV5Nifty6Stream6concaturFGSaGS0_qd____GS0_qd___"></a>
+                    <a name="//apple_ref/swift/Method/concat(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFV5Nifty6Stream6concaturFGSaGS0_qd____GS0_qd___">concat(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Synonym for <code>join</code>, but takes an array.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">concat</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">streams</span><span class="p">:</span> <span class="p">[</span><span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZFV5Nifty6Stream6concaturFtGSaGS0_qd_____GS0_qd___"></a>
+                    <a name="//apple_ref/swift/Method/concat(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZFV5Nifty6Stream6concaturFtGSaGS0_qd_____GS0_qd___">concat(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Synonym for <code>join</code>, but takes varargs.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="n">concat</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">streams</span><span class="p">:</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;...</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV5Nifty6Stream7forEachFFxT_GVS_6FutureT__"></a>
+                    <a name="//apple_ref/swift/Method/forEach(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV5Nifty6Stream7forEachFFxT_GVS_6FutureT__">forEach(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Runs the stream on a given handler.
+The handler is expected to be synchronous, so the returned <code><a href="../Structs/Future.html">Future&lt;()&gt;</a></code>
+represents the time that all calls to the handler have exited.
+You can use <code>Stream.cont.run()</code> to control the time the future completes</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">forEach</span><span class="p">(</span><span class="nv">handler</span><span class="p">:</span> <span class="kt">T</span> <span class="o">-&gt;</span> <span class="p">())</span> <span class="o">-&gt;</span> <span class="kt">Future</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>handler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The closure to call with each element.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A future representing when all the calls to the handler have exited.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV5Nifty6Stream6filterFFxSbGS0_x_"></a>
+                    <a name="//apple_ref/swift/Method/filter(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV5Nifty6Stream6filterFFxSbGS0_x_">filter(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">filter</span><span class="p">(</span><span class="nv">predicate</span><span class="p">:</span> <span class="kt">T</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Stream</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>predicate</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A test for elements of this stream.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A new stream whose elements are the elements of this stream that passed the predicate test.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV5Nifty6Stream6reduceurFT8identityqd__10accumulateFTqd__qd___qd__7combineFTqd__x_qd___GVS_6Futureqd___"></a>
+                    <a name="//apple_ref/swift/Method/reduce(identity:accumulate:combine:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV5Nifty6Stream6reduceurFT8identityqd__10accumulateFTqd__qd___qd__7combineFTqd__x_qd___GVS_6Futureqd___">reduce(identity:accumulate:combine:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Asynchronously and concurrently reduces elements of
+this stream to a single value.</p>
+
+<pre class="highlight plaintext"><code>let futureSum = arrayOfStrings.stream()
+    .reduce(identity: 0, accumulate: +) { i, s in
+        return i + s.characters.count
+    }
+</code></pre>
+
+<p>Which can be simplified to:</p>
+
+<pre class="highlight plaintext"><code>let futureSum = arrayOfStrings.stream()
+    .map { s.characters.count }
+    .reduce(identity: 0, accumulate: +, combine: +)
+</code></pre>
+
+<p>The following laws must hold.</p>
+
+<ul>
+<li><p><strong>Identity:</strong></p>
+<pre class="highlight plaintext"><code>accumulate(identity, a) == a
+</code></pre></li>
+<li><p><strong>Commutative:</strong></p>
+<pre class="highlight plaintext"><code>accumulate(a, b) == accumulate(b, a)
+combine(combine(reduced, a), b) ==
+                                 combine(combine(reduced, b), a)
+</code></pre></li>
+<li><p><strong>Associative:</strong></p>
+<pre class="highlight plaintext"><code>combine(accumulate(a, b), element) ==
+                              accumulate(a, combine(b, element))
+accumulate(accumulate(a, b), c) ==
+                                 accumulate(a, accumulate(b, c))
+</code></pre></li>
+</ul>
+
+<p>These laws are necessary largely because Streams are
+concurrent and unordered.</p>
+
+<p><code>accumulate</code> is necessary because
+several reductions may be occurring at a time,
+which requires their reductions to be accumulated somehow.</p>
+
+<p>The initial value is expected to be an identity so
+that it can start more than one reduction.
+If it weren&rsquo;t an identity, the final accumulation of
+reducitons would produce unexpected results.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>If the underlying stream is not concurrent,
+this does not perform concurrently.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">reduce</span><span class="o">&lt;</span><span class="kt">Reduced</span><span class="o">&gt;</span><span class="p">(</span>
+        <span class="n">identity</span> <span class="nv">identity</span><span class="p">:</span> <span class="kt">Reduced</span><span class="p">,</span>
+        <span class="nv">accumulate</span><span class="p">:</span> <span class="p">(</span><span class="kt">Reduced</span><span class="p">,</span> <span class="kt">Reduced</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Reduced</span><span class="p">,</span>
+        <span class="nv">combine</span><span class="p">:</span> <span class="p">(</span><span class="kt">Reduced</span><span class="p">,</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Reduced</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Future</span><span class="o">&lt;</span><span class="kt">Reduced</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>identity</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A value that will have no effect when accumulated.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>accumulate</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function for combining two reduced values.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>combine</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function for combining an element and a reduction into a new reduction.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A future that will complete with the result of the reduction.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FV5Nifty6Stream6reduceurFTqd__7combineFTqd__x_qd___GVS_6Futureqd___"></a>
+                    <a name="//apple_ref/swift/Method/reduce(_:combine:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FV5Nifty6Stream6reduceurFTqd__7combineFTqd__x_qd___GVS_6Futureqd___">reduce(_:combine:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Asynchronously reduces elements of this stream to a single value.</p>
+
+<pre class="highlight plaintext"><code>let futureSum = arrayOfStrings.stream()
+    .reduce(0) { i, s in
+        return i + s.characters.count
+    }
+</code></pre>
+
+<p>Which can be simplified to:</p>
+
+<pre class="highlight plaintext"><code>let futureSum = arrayOfStrings.stream()
+    .map { s.characters.count }
+    .reduce(0, combine: +)
+</code></pre>
+
+<p>The following law must hold.</p>
+
+<ul>
+<li><p><strong>Commutative:</strong></p>
+<pre class="highlight plaintext"><code>combine(combine(reduced, a), b) ==
+                                 combine(combine(reduced, b), a)
+</code></pre></li>
+</ul>
+
+<p>This law is necessary largely because Streams are unordered.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">reduce</span><span class="o">&lt;</span><span class="kt">Reduced</span><span class="o">&gt;</span><span class="p">(</span>
+        <span class="nv">initial</span><span class="p">:</span> <span class="kt">Reduced</span><span class="p">,</span>
+        <span class="nv">combine</span><span class="p">:</span> <span class="p">(</span><span class="kt">Reduced</span><span class="p">,</span> <span class="kt">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Reduced</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Future</span><span class="o">&lt;</span><span class="kt">Reduced</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>initial</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The value to start reduction with.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>combine</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function for combining an element and a reduction into a new reduction.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A future that will complete with the result of the reduction.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2016-03-23)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.5.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

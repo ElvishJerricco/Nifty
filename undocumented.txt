@@ -1,0 +1,77 @@
+Continuation.swift
+	public let run : (A -> R) -> R
+	public init(_ run: (A -> R) -> R)
+	public func <^><R, A, B>(f: A -> B, cont: Continuation<R, A>) -> Continuation<R, B>
+	public func <*><R, A, B>(f: Continuation<R, A -> B>, cont: Continuation<R, A>) -> Continuation<R, B>
+	public func >>==<R, A, B>(cont: Continuation<R, A>, f: A -> Continuation<R, B>) -> Continuation<R, B>
+Stream.swift
+	public func <^><T, U>(f: T -> U, stream: Stream<T>) -> Stream<U>
+	public func <*><T, U>(f: Stream<T -> U>, stream: Stream<T>) -> Stream<U>
+	public func >>==<T, U>(stream: Stream<T>, f: T -> Stream<U>) -> Stream<U>
+	public func +<T>(a: Stream<T>, b: Stream<T>) -> Stream<T>
+Either.swift
+	public enum Either<L, R>
+	case Left(L)
+	case Right(R)
+	public enum Either&lt;L, R&gt;
+	public func map<U>(f: R -> U) -> Either<L, U>
+	public func <^><L, R, U>(f: R -> U, either: Either<L, R>) -> Either<L, U>
+	public enum Either&lt;L, R&gt;
+	public func apply<U>(fn: Either<L, R -> U>) -> Either<L, U>
+	public func <*><L, A, B>(
+    f: Either<L, A -> B>, a: Either<L, A>
+) -> Either<L, B>
+	public enum Either&lt;L, R&gt;
+	public static func of<L, R>(r: R) -> Either<L, R>
+	public func flatMap<U>(f: R -> Either<L, U>) -> Either<L, U>
+	public func >>==<L, R, U>(
+    either: Either<L, R>,
+    f: R -> Either<L, U>
+) -> Either<L, U>
+	public enum Either&lt;L, R&gt;
+	public func leftMap<U>(f: L -> U) -> Either<U, R>
+	public enum Either&lt;L, R&gt;
+	public func leftApply<U>(resultFunc: Either<L -> U, R>) -> Either<U, R>
+	public enum Either&lt;L, R&gt;
+	public static func leftOf<L, R>(l: L) -> Either<L, R>
+	public func leftFlatMap<U>(f: L -> Either<U, R>) -> Either<U, R>
+Channel.swift
+	public let cont: Continuation<(), T>
+	public init(_ cont: Continuation<(), T>)
+	public init(_ cont: (T -> ()) -> ())
+	public func <^><T, U>(f: T -> U, channel: Channel<T>) -> Channel<U>
+	public func <*><A, B>(f: Channel<A -> B>, a: Channel<A>) -> Channel<B>
+	public func >>==<T, U>(channel: Channel<T>, f: T -> Channel<U>) -> Channel<U>
+	public func +<T>(a: Channel<T>, b: Channel<T>) -> Channel<T>
+Lock.swift
+	public init(_ value: T)
+Future.swift
+	public init()
+	public let cont: Continuation<(), T>
+	public init(_ cont: Continuation<(), T>)
+	public init(_ cont: (T -> ()) -> ())
+	public func <^><T, U>(f: T -> U, future: Future<T>) -> Future<U>
+	public func <*><A, B>(f: Future<A -> B>, a: Future<A>) -> Future<B>
+	public func >>==<T, U>(future: Future<T>, f: T -> Future<U>) -> Future<U>
+Curry.swift
+	public func curry<A, B, C>(fn: (A, B) -> C) -> A -> B -> C
+	public func curry<A, B, C, D>(fn: (A, B, C) -> D) -> A -> B -> C -> D
+	public func curry<A, B, C, D, E>(
+    fn: (A, B, C, D) -> E
+) -> A -> B -> C -> D -> E
+	public func curry<A, B, C, D, E, F>(
+    fn: (A, B, C, D, E) -> F
+) -> A -> B -> C -> D -> E -> F
+	public func curry<A, B, C, D, E, F, G>(
+    fn: (A, B, C, D, E, F) -> G
+) -> A -> B -> C -> D -> E -> F -> G
+	public func curry<A, B, C, D, E, F, G, H>(
+    fn: (A, B, C, D, E, F, G) -> H
+) -> A -> B -> C -> D -> E -> F -> G -> H
+	public func curry<A, B, C, D, E, F, G, H, I>(
+    fn: (A, B, C, D, E, F, G, H) -> I
+) -> A -> B -> C -> D -> E -> F -> G -> H -> I
+Operators.swift
+	public func *<A, B, C>(g: B -> C, f: A -> B) -> A -> C
+	public func +<T>(element: T, array: [T]) -> [T]
+	public func +<T>(array: [T], element: T) -> [T]

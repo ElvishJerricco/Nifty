@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ChannelWriter Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/ChannelWriter" class="dashAnchor"></a>
+    <a title="ChannelWriter Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">Nifty Docs</a> (37% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">Nifty Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        ChannelWriter Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/ChannelWriter.html">ChannelWriter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Lock.html">Lock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Promise.html">Promise</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/Either.html">Either</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/CollectionType.html">CollectionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/DispatchQueue.html">DispatchQueue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Optional.html">Optional</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF5Niftyoi1mu1_rFTFq0_q1_Fq_q0__Fq_q1_">*(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/+(_:_:).html">+(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF5Niftyoi1purFTGSaq__q__GSaq__">+(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF5Niftyoi1purFTq_GSaq___GSaq__">+(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/+(_:_:).html">+(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF5Niftyoi3lmgu1_rFTGOS_6Eitherq_Fq0_q1__GS0_q_q0___GS0_q_q1__">&lt;*&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&lt;*&gt;(_:_:).html">&lt;*&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF5Niftyoi3lmgu0_rFTGVS_6FutureFq_q0__GS0_q___GS0_q0__">&lt;*&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&lt;*&gt;(_:_:).html">&lt;*&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&lt;^&gt;(_:_:).html">&lt;^&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&lt;^&gt;(_:_:).html">&lt;^&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF5Niftyoi3lxgu1_rFTFq0_q1_GOS_6Eitherq_q0___GS0_q_q1__">&lt;^&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF5Niftyoi3lxgu0_rFTFq_q0_GVS_6Futureq___GS0_q0__">&lt;^&gt;(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&gt;&gt;==(_:_:).html">&gt;&gt;==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF5Niftyoi4ggeeu0_rFTGVS_6Futureq__Fq_GS0_q0___GS0_q0__">&gt;&gt;==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions/&gt;&gt;==(_:_:).html">&gt;&gt;==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF5Niftyoi4ggeeu1_rFTGOS_6Eitherq_q0__Fq0_GS0_q_q1___GS0_q_q1__">&gt;&gt;==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty6callccu1_rFFFq0_GVS_12Continuationq_q1__GS0_q_q0__GS0_q_q0__">callcc(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty5curryu4_rFFTq_q0_q1_q2_q3__q4_Fq_Fq0_Fq1_Fq2_Fq3_q4_">curry(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty5curryu3_rFFTq_q0_q1_q2__q3_Fq_Fq0_Fq1_Fq2_q3_">curry(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty5curryu6_rFFTq_q0_q1_q2_q3_q4_q5__q6_Fq_Fq0_Fq1_Fq2_Fq3_Fq4_Fq5_q6_">curry(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty5curryu7_rFFTq_q0_q1_q2_q3_q4_q5_q6__q7_Fq_Fq0_Fq1_Fq2_Fq3_Fq4_Fq5_Fq6_q7_">curry(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty5curryu2_rFFTq_q0_q1__q2_Fq_Fq0_Fq1_q2_">curry(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty5curryu1_rFFTq_q0__q1_Fq_Fq0_q1_">curry(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F5Nifty5curryu5_rFFTq_q0_q1_q2_q3_q4__q5_Fq_Fq0_Fq1_Fq2_Fq3_Fq4_q5_">curry(_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/JsonDeserializable.html">JsonDeserializable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:P5Nifty10JsonReader">JsonReader</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/JsonSerializable.html">JsonSerializable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:P5Nifty10JsonWriter">JsonWriter</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Channel.html">Channel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Continuation.html">Continuation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Future.html">Future</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Stream.html">Stream</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>ChannelWriter</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ChannelWriter</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                </div>
+              </div>
+            <p>The ChannelWriter class writes values to a channel.
+It is a reference type so that <code><a href="../Structs/Channel.html">Channel</a></code>s have a common object to add handlers to.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC5Nifty13ChannelWritercurFMGS0_q__FT_GS0_q__"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC5Nifty13ChannelWritercurFMGS0_q__FT_GS0_q__">init()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes an empty ChannelWriter</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC5Nifty13ChannelWriter10addHandlerurFGS0_q__FFq_T_T_"></a>
+                    <a name="//apple_ref/swift/Method/addHandler(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC5Nifty13ChannelWriter10addHandlerurFGS0_q__FFq_T_T_">addHandler(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addHandler</span><span class="p">(</span><span class="nv">handler</span><span class="p">:</span> <span class="kt">T</span> <span class="o">-&gt;</span> <span class="p">())</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>handler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function to be called when a value is written to this.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC5Nifty13ChannelWriter5writeERR"></a>
+                    <a name="//apple_ref/swift/Method/write(_:queue:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC5Nifty13ChannelWriter5writeERR">write(_:queue:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Asynchronously and concurrently writes a value to all attached handlers.</p>
+
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>If the queue passed is not concurrent, handlers will not be called concurrently.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">write</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">T</span><span class="p">,</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span> <span class="o">=</span> <span class="kt">Dispatch</span><span class="o">.</span><span class="n">globalQueue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Future</span><span class="o">&lt;</span><span class="p">()</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The value to write</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The queue to execute handlers on</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code><a href="../Structs/Future.html">Future</a></code> that will complete when all handlers have exited.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC5Nifty13ChannelWriter7channelGVS_7Channelq__"></a>
+                    <a name="//apple_ref/swift/Property/channel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC5Nifty13ChannelWriter7channelGVS_7Channelq__">channel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <code><a href="../Structs/Channel.html">Channel</a></code> which will receive values written to this writer.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">channel</span><span class="p">:</span> <span class="kt">Channel</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="" target="_blank" rel="external">ElvishJerricco</a>. All rights reserved. (Last updated: 2016-02-01)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.5.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
