@@ -186,7 +186,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = ElvishJerricco;
 				TargetAttributes = {
 					7EFF2AC71C4B6FAA00E27D74 = {
@@ -271,6 +271,8 @@
 		7EFF2A7A1C4B6F5900E27D74 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
