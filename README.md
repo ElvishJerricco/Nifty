@@ -16,6 +16,8 @@ Nifty is a library of asynchronous utilities for everyday programmers.
 * Continuation monad
 * Either enum
 
+---
+
 Nifty's concurrency is implemented via [DispatchKit](https://github.com/anpol/DispatchKit).
 
 ```swift
