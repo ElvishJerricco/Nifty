@@ -1,4 +1,4 @@
-<img src="Nifty.png" width="100px"/> Nifty
+<img src="Nifty-Rounded.png" width="100px"/> Nifty
 ---
 
 [Documentation](http://elvishjerricco.github.io/Nifty/).
